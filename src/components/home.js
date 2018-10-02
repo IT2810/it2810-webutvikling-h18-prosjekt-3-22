@@ -7,15 +7,16 @@ class Home extends Component {
     return (
 
           <View style={{flexDirection: 'column'}}>
-              <View style={{flex:1 , marginTop:150}} >
-                  <Button style={styles.button}
-                  icon={{name: 'check-square-o', type: 'font-awesome', size: 125}}
+              <View style={{flex:1 , marginTop:150, width:200}} >
+
+                  <Button
+                  icon={{name: 'check-square-o', type: 'font-awesome', size: 60}}
                   title={`To do`}
                   />
               </View>
-              <View style={{flex:1, marginBottom:150}} >
-                  <Button style={styles.button}
-                  icon={{name: 'check-square-o', type: 'font-awesome', size: 125}}
+              <View style={{flex:1, marginBottom:150, width: 200}} >
+                  <Button
+                  icon={{name: 'flag', type: 'font-awesome', size: 60}}
                   title={`Goal`}
                   />
           </View>
@@ -29,19 +30,20 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    //backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 100,
   },
 
+/** This doesn't work??
   button: {
-    backgroundColor: 'red',
+    backgroundColor: '#ffccff',
     borderRadius: 10,
-    width:500,
+    width:600,
     height: 110,
-    color: 'black',
-  },
+    //color: 'black',
+  },**/
 });
 
 export default Home
