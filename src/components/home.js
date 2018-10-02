@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
+
+
 
 class Home extends Component {
   render() {
     return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
-          <View style={{flexDirection: 'column'}}>
-              <View style={{flex:1 , marginTop:150, width:200}} >
+        <View style={{flex:1 , marginTop:100, width:200}} >
+            <Text>Home Screen</Text>
+            <Button
+            title={`To do`}
+            onPress={() => this.props.navigation.navigate('Todo')}
+            icon={{name: 'check-square-o', type: 'font-awesome', size: 60}}
+            />
+        </View>
+        <View style={{flex:1 , marginBottom:100, width:200}} >
+            <Button
+            onPress={() => this.props.navigation.navigate('Goal')}
+            icon={{name: 'flag', type: 'font-awesome', size: 60}}
+            title={`Goal`}
+            />
+        </View>
+      </View>
 
-                  <Button
-                  icon={{name: 'check-square-o', type: 'font-awesome', size: 60}}
-                  title={`To do`}
-                  />
-              </View>
-              <View style={{flex:1, marginBottom:150, width: 200}} >
-                  <Button
-                  icon={{name: 'flag', type: 'font-awesome', size: 60}}
-                  title={`Goal`}
-                  />
-          </View>
 
-          </View>
 
     );
   }
