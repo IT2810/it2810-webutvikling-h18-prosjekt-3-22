@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
+import TodoScreen from './src/components/todo.js'
+import HomeScreen from './src/components/home.js'
+import GoalScreen from './src/components/goal.js';
 
-export default class App extends React.Component {
+import {createStackNavigator} from 'react-navigation';
+
+
+const RootStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Todo: TodoScreen,
+    Goal: GoalScreen,
+
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+export default class App extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+    return <RootStack />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
