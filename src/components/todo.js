@@ -9,10 +9,23 @@ import {
   TouchableOpacity
 } from "react-native";
 
-
+import Note from './note.js'
 
 class Todo extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      noteArray: [],
+      noteText: '',
+    }
+  }
+
   render(){
+
+    let notes = this.state.noteArray.map((val, key) => {
+      return <Note key={key} keyVal={key} val={val}
+            deleteMethod={() => this.deleteNote(key)} />
+    })
     return (
         <View style={styles.container}>
           <View style={styles.header}>
@@ -26,16 +39,21 @@ class Todo extends Component {
 
           <TextInput
               style={styles.textInput}
+              onChangeText={(noteText) => this.setState({noteText})}
+              value={this.state.noteText}
               placeholder=">note"
               placeholderTextColor="white"
               underlineColorAndroid="transparent">
           </TextInput>
 
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity onPress={this.addNote.bind(this)} style={styles.addButton}>
             <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>
         </View>
     );
+  }
+  addNote(){
+    alert("test");
   }
 }
 
