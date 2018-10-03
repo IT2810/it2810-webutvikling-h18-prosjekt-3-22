@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 1814,
-  "expoServerNgrokUrl": "https://2v-knu.heddanh.it2810-webutvikling-h18-prosjekt-3-22.exp.direct",
-  "packagerNgrokUrl": "https://packager.2v-knu.heddanh.it2810-webutvikling-h18-prosjekt-3-22.exp.direct",
-  "ngrokPid": 1831
+  "devToolsPort": 19004,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://2v-knu.tanhol.it2810-webutvikling-h18-prosjekt-3-22.exp.direct",
+  "packagerNgrokUrl": "https://packager.2v-knu.tanhol.it2810-webutvikling-h18-prosjekt-3-22.exp.direct",
+  "ngrokPid": 24094
 }
