@@ -31,7 +31,9 @@ class Todo extends Component {
               underlineColorAndroid="transparent">
           </TextInput>
 
-
+        <TouchableOpacity style={styles.addButton}>
+            <Text style={styles.addButtonText}>+</Text>
+        </TouchableOpacity>
         </View>
     );
   }
