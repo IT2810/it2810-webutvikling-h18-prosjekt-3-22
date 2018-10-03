@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    backgroundColor: '#E91E63',
+    backgroundColor: '#4d79ff',
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 10,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     zIndex: 11,
     right: 20,
     bottom: 90,
-    backgroundColor: "#E91E63",
+    backgroundColor: '#4d79ff',
     width: 90,
     height: 90,
     borderRadius: 50,
