@@ -29,7 +29,7 @@ class Todo extends Component {
     return (
         <View style={styles.container}>
           <View style={styles.header}>
-              <Text style={styles.headerText}>- Noter -</Text>
+              <Text style={styles.headerText}>Todo</Text>
           </View>
 
           <ScrollView style={styles.scrollContainer}>
@@ -58,11 +58,11 @@ class Todo extends Component {
         this.state.noteArray.push({
           'date': d.getFullYear() + "/" + (d.getMonth() + 1) +
           "/" + d.getDate(),
+          "note" : this.state.noteText
         })
         this.setState({noteArray: this.state.noteArray})
         this.setState({noteText: ''});
     }
-    alert("test");
   }
 }
 
