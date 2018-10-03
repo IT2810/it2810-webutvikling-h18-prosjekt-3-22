@@ -13,9 +13,9 @@ class Todo extends Component {
     return (
         <View key={this.props.keyval} style={styles.note}>
             <Text style={styles.noteText}>{this.props.val.date}></Text>
-            <Text style={styles.noteText}>{this.props.val.date}></Text>
+            <Text style={styles.noteText}>{this.props.val.note}></Text>
 
-            <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDate}>
+            <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
                 <Text style={styles.noteDeleteText}>D</Text>
             </TouchableOpacity>
         </View>
@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#2980b9',
+    padding: 10,
+    top: 10,
+    bottom: 10,
+    right: 10,
   },
 
   noteDeleteText: {

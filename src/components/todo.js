@@ -33,7 +33,7 @@ class Todo extends Component {
           </View>
 
           <ScrollView style={styles.scrollContainer}>
-
+              {notes}
           </ScrollView>
 
 
@@ -53,6 +53,15 @@ class Todo extends Component {
     );
   }
   addNote(){
+    if(this.state.noteText){
+        var d = new Date();
+        this.state.noteArray.push({
+          'date': d.getFullYear() + "/" + (d.getMonth() + 1) +
+          "/" + d.getDate(),
+        })
+        this.setState({noteArray: this.state.noteArray})
+        this.setState({noteText: ''});
+    }
     alert("test");
   }
 }
