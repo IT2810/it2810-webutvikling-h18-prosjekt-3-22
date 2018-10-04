@@ -53,11 +53,12 @@ class Goal extends Component {
     this._subscription = null;
   }
 
+  // fires when a new goal is set by user
   onSubmit = (inputValue) => {
       let numbers = '0123456789';
 
+      // check if string contains only numbers
       for (var i=0; i < inputValue.length; i++) {
-          // check if string contains only numbers
           if(!(numbers.indexOf(inputValue[i]) > -1 )) {
               alert("please enter numbers only");
               return
