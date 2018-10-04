@@ -8,7 +8,7 @@ import {
 
 
 
-class Todo extends Component {
+class Note extends Component {
   render(){
     return (
         <View key={this.props.keyval} style={styles.note}>
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Todo
+export default Note

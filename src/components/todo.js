@@ -64,6 +64,12 @@ class Todo extends Component {
         this.setState({noteText: ''});
     }
   }
+
+
+deleteNote(key){
+  this.state.noteArray.splice(key, 1);
+  this.setState({noteArray: this.state.noteArray});
+  }
 }
 
 
