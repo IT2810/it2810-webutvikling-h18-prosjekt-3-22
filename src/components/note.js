@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Icon } from 'react-native-elements';
 import {
   StyleSheet,
   Text,
@@ -16,7 +17,7 @@ class Note extends Component {
             <Text style={styles.noteText}>{this.props.val.note}></Text>
 
             <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
-                <Text style={styles.noteDeleteText}>D</Text>
+                <Icon name='delete' color='#ff704d' />
             </TouchableOpacity>
         </View>
     );
@@ -43,16 +44,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2980b9',
     padding: 10,
     top: 10,
     bottom: 10,
     right: 10,
   },
-
-  noteDeleteText: {
-    color: 'white',
-  }
 });
 
 export default Note
