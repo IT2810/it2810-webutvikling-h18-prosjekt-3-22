@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home snapshot 1`] = `
+exports[`Make snapshots Home page snapshot 1`] = `
 <View
-  id="homePage"
   style={
     Object {
       "alignItems": "center",
@@ -50,6 +49,7 @@ exports[`Home snapshot 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={null}
+        testID="toDoBtn"
       >
         <View
           pointerEvents="box-only"
@@ -180,6 +180,7 @@ exports[`Home snapshot 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={null}
+        testID="goalBtn"
       >
         <View
           pointerEvents="box-only"
