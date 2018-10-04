@@ -2,7 +2,9 @@
 import React, { Component } from "react";
 
 import {
+  AppRegistry,
   StyleSheet,
+  AsyncStorage,
   Text,
   TextInput,
   ScrollView,
@@ -12,7 +14,7 @@ import {
 
 import Note from './note.js'
 
-class Todo extends Component {
+export default class Todo extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -20,6 +22,53 @@ class Todo extends Component {
       noteText: '',
     }
   }
+  componentDidMount() {
+    Tasks.all(noteArray => this.setState({ noteArray: noteArray || [] }));
+  }
+
+  changeTextHandler = noteText => {
+    this.setState({ noteText: noteText });
+  };
+
+
+    addNote = () => {
+      let notEmpty = this.state.noteText.trim().length > 0;
+      if(notEmpty){
+          var d = new Date();
+          this.state.noteArray.push({
+            'date': d.getFullYear() + "/" + (d.getMonth() + 1) +
+            "/" + d.getDate(),
+            "note" : this.state.noteText
+          })
+          this.setState(
+            prevState => {
+              let {noteArray, noteText} = prevState;
+              return {
+                noteArray: noteArray.concat({key: noteArray.length, noteText: noteText}),
+                noteText: ""
+              };
+            },
+                () => Tasks.save(this.state.noteArray)
+          );
+
+          //this.setState({noteArray: this.state.noteArray})
+          //this.setState({noteText: ''});
+      }
+    }
+
+
+  deleteNote = i => {
+    this.setState(
+      prevState => {
+        let noteArray = prevState.noteArray.slice();
+        noteArray.splice(i, 1);
+
+        return {noteArray: noteArray};
+      },
+      () => Tasks.save(this.state.noteArray)
+    );
+  };
+
 
   render(){
 
@@ -53,25 +102,29 @@ class Todo extends Component {
         </View>
     );
   }
-  addNote(){
-    if(this.state.noteText){
-        var d = new Date();
-        this.state.noteArray.push({
-          'date': d.getFullYear() + "/" + (d.getMonth() + 1) +
-          "/" + d.getDate(),
-          "note" : this.state.noteText
-        })
-        this.setState({noteArray: this.state.noteArray})
-        this.setState({noteText: ''});
-    }
-  }
 
 
-deleteNote(key){
-  this.state.noteArray.splice(key, 1);
-  this.setState({noteArray: this.state.noteArray});
-  }
 }
+
+
+let Tasks = {
+  convertToArrayOfObject(noteArray, callback) {
+    return callback(
+      noteArray ? noteArray.split("||").map((note, i) => ({ key: i, noteText: note })) : []
+    );
+  },
+  convertToStringWithSeparators(noteArray) {
+    return noteArray.map(note=> note.noteText).join("||");
+  },
+  all(callback) {
+    return AsyncStorage.getItem("TASKS", (err, noteArray) =>
+      this.convertToArrayOfObject(noteArray, callback)
+    );
+  },
+  save(noteArray) {
+    AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(noteArray));
+  }
+};
 
 
 const styles = StyleSheet.create({
@@ -137,4 +190,5 @@ const styles = StyleSheet.create({
 
 });
 
-export default Todo
+
+AppRegistry.registerComponent("Todo", () => Todo);
