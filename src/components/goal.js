@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Expo} from "expo";
 import {Pedometer} from "expo";
 import { Alert, StyleSheet, Text, View, TextInput} from 'react-native';
-//import { AsyncStorage } from "react-native";
+import { AsyncStorage } from "react-native";
 
 class Goal extends Component {
   state = {
@@ -34,6 +34,7 @@ class Goal extends Component {
         }
     );
 
+    //get number of steps walked today
     const end = new Date();
     const start = new Date(end.getFullYear(), end.getMonth(), end.getDay(), 0, 0, 0, 0);
 
@@ -41,17 +42,10 @@ class Goal extends Component {
         result => {
           this.setState({
               pastStepCount: result.steps,
-          },
-        async () => {
-            await AsyncStorage.setItem('Steps', result.steps);
-        });
-        },
-        error => {
-          this.setState({
-              pastStepCount: "Could not get stepCount: " + error
           });
         }
     );
+      this.getStepGoal()
   };
 
   _unsubscribe = () => {
@@ -75,8 +69,39 @@ class Goal extends Component {
           this.setState({
               stepGoal: inputValue
           })
+
+          this.saveGoal(inputValue)
       }
   }
+
+  //save goal with asyncStorage
+  saveGoal = (goal) => {
+
+    const saveStepGoal = async stepGoal => {
+        try {
+            await AsyncStorage.setItem('stepGoal', stepGoal);
+        } catch (error) {
+            alert(error.message);
+        }
+        }
+
+        saveStepGoal(goal)
+    }
+
+    //get saved goal with asyncStorage
+    getStepGoal = () => {
+        const getStepGoal = async () => {
+            let stepGoal = '';
+            try {
+                stepGoal = await AsyncStorage.getItem('stepGoal') || 'none';
+                this.state.stepGoal = stepGoal;
+            } catch (error) {
+                alert(error.message);
+            }
+            return stepGoal;
+        }
+        getStepGoal(this)
+    }
 
   render() {
       const stepsLeft = this.state.stepGoal - this.state.pastStepCount;
@@ -94,7 +119,7 @@ class Goal extends Component {
       <View style={{ flex: 1, alignItems: 'center' }}>
         <Text style={{padding: 10, fontSize: 42}}>Goal</Text>
 
-          <Text>
+          <Text style={{marginBottom: 10}}>
               Steps taken today: {this.state.pastStepCount}/{this.state.stepGoal}
           </Text>
 
@@ -106,7 +131,7 @@ class Goal extends Component {
 
           <TextInput style={{marginTop: 10, width: "80%", height: 50, borderColor: 'gray',
               borderWidth: 1, padding: 15, textAlign: "center"}}
-            placeholder={"10 000"}
+            placeholder={"10 000 steps"}
             onChangeText={newInput => {this.setState({newGoal: newInput})}}
             onSubmitEditing={() => this.onSubmit(this.state.newGoal)}
             clearButtonMode={"always"}
