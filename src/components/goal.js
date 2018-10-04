@@ -8,7 +8,7 @@ class Goal extends Component {
   state = {
     isPedometerAvailable: "checking",
     pastStepCount: 0,
-    stepGoal: this.getStepGoal,
+    stepGoal: 10000,
     newGoal: 0
   }
 
