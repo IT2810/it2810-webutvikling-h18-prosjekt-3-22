@@ -1,17 +1,242 @@
-import React, { Component } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
 
+import React, { Component } from "react";
 
+import {
+  AppRegistry,
+  StyleSheet,
+  AsyncStorage,
+  Text,
+  TextInput,
+  ScrollView,
+  View,
+  FlatList,
+  Button,
+  Keyboard,
+  Platform,
+  TouchableOpacity
+} from "react-native";
 
-class Todo extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screenkk</Text>
-      </View>
-    );
+import Note from './note.js'
+const isAndroid = Platform.OS == "android";
+const viewPadding = 10;
+
+export default class Todo extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      noteArray: [],
+      noteText: '',
+    }
   }
+
+
+  changeTextHandler = noteText => {
+    this.setState({ noteText: noteText });
+  };
+
+
+    addNote = () => {
+      let notEmpty = this.state.noteText.trim().length > 0;
+
+      //Checks to see if something is written in the todo textfield.
+      //If nothing is written, nothing will happen when you click the add button
+      if(notEmpty){
+          var d = new Date();
+          /**this.state.noteArray.push({
+            'date': d.getFullYear() + "/" + (d.getMonth() + 1) +
+            "/" + d.getDate(),
+            "note" : this.state.noteText
+          })**/
+          this.setState(
+            prevState => {
+              let {noteArray, noteText} = prevState;
+              return {
+                noteArray: noteArray.concat({key: noteArray.length, noteText: noteText}),
+                noteText: ""
+              };
+            },
+                () => Tasks.save(this.state.noteArray)
+          );
+
+          //this.setState({noteArray: this.state.noteArray})
+          //this.setState({noteText: ''});
+      }
+    }
+
+
+  deleteNote = i => {
+    this.setState(
+      prevState => {
+        let noteArray = prevState.noteArray.slice();
+        noteArray.splice(i, 1);
+
+        return {noteArray: noteArray};
+      },
+      () => Tasks.save(this.state.noteArray)
+    );
+  };
+
+  componentDidMount() {
+  Keyboard.addListener(
+    isAndroid ? "keyboardDidShow" : "keyboardWillShow",
+    e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
+  );
+
+  Keyboard.addListener(
+    isAndroid ? "keyboardDidHide" : "keyboardWillHide",
+    () => this.setState({ viewPadding: viewPadding })
+  );
+
+  Tasks.all(noteArray => this.setState({ noteArray: noteArray || [] }));
 }
 
-export default Todo;
+render() {
+   return (
+     <View
+       style={[styles.container, { paddingBottom: this.state.viewPadding }]}
+     >
+     <View style={styles.header}>
+        <Text style={styles.headerText}> Todo </Text>
+      </View>
+       <FlatList
+         style={styles.list}
+         data={this.state.noteArray}
+         renderItem={({ item, index }) =>(
+           <View >
+
+             <View style={styles.listItemCont}>
+               <Text style={styles.listItem}>
+                 {item.noteText}
+               </Text>
+
+             </View>
+
+           </View>
+        ) }
+        keyExtractor={(item) => item.toString()}
+       />
+       <TextInput
+         style={styles.textInput}
+         onChangeText={this.changeTextHandler}
+         onSubmitEditing={this.addNote}
+         value={this.state.noteText}
+         placeholder="Add Tasks"
+         returnKeyType="done"
+         returnKeyLabel="done"
+       />
+     </View>
+   );
+ }
+}
+
+
+let Tasks = {
+  convertToArrayOfObject(noteArray, callback) {
+    return callback(
+      noteArray ? noteArray.split("||").map((note, i) => ({ key: i, noteText: note })) : []
+    );
+  },
+  convertToStringWithSeparators(noteArray) {
+    return noteArray.map(note => note.noteText).join("||");
+  },
+  all(callback) {
+    return AsyncStorage.getItem("TASKS", (err, noteArray) =>
+      this.convertToArrayOfObject(noteArray, callback)
+    );
+  },
+  save(noteArray) {
+    AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(noteArray));
+  }
+};
+
+
+const styles = StyleSheet.create({
+  container: {
+  flex: 1,
+},
+list: {
+  width: "100%"
+},
+listItem: {
+  paddingTop: 2,
+  paddingBottom: 2,
+  fontSize: 18
+},
+hr: {
+  height: 1,
+  backgroundColor: "gray"
+},
+listItemCont: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between"
+},
+textInput: {
+  height: 40,
+  paddingRight: 10,
+  paddingLeft: 10,
+  borderColor: "gray",
+  borderWidth: isAndroid ? 0 : 1,
+  width: "100%"
+},
+
+  header: {
+    backgroundColor: '#4d79ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 10,
+    borderBottomColor: "#ddd",
+  },
+
+  headerText: {
+    color: 'white',
+    fontSize: 18,
+    padding: 26,
+  },
+
+  scrollContainer: {
+    flex: 1,
+    marginBottom: 100,
+  },
+
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+  },
+
+  textInput: {
+    alignSelf: 'stretch',
+    color: '#fff',
+    padding: 20,
+    backgroundColor: "#252525",
+    borderTopWidth: 2,
+    borderTopColor: "#ededed",
+  },
+
+  addButton: {
+    position: 'absolute',
+    zIndex: 11,
+    right: 20,
+    bottom: 90,
+    backgroundColor: '#4d79ff',
+    width: 90,
+    height: 90,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 8,
+  },
+
+  addButtonText: {
+    color: "#fff",
+    fontSize: 25,
+  },
+
+
+});
+
+
+AppRegistry.registerComponent("Todo", () => Todo);
