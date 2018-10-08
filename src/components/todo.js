@@ -9,10 +9,16 @@ import {
   TextInput,
   ScrollView,
   View,
+  FlatList,
+  Button,
+  Keyboard,
+  Platform,
   TouchableOpacity
 } from "react-native";
 
 import Note from './note.js'
+const isAndroid = Platform.OS == "android";
+const viewPadding = 10;
 
 export default class Todo extends Component {
   constructor(props){
@@ -22,9 +28,7 @@ export default class Todo extends Component {
       noteText: '',
     }
   }
-  componentDidMount() {
-    Tasks.all(noteArray => this.setState({ noteArray: noteArray || [] }));
-  }
+
 
   changeTextHandler = noteText => {
     this.setState({ noteText: noteText });
@@ -33,13 +37,16 @@ export default class Todo extends Component {
 
     addNote = () => {
       let notEmpty = this.state.noteText.trim().length > 0;
+
+      //Checks to see if something is written in the todo textfield.
+      //If nothing is written, nothing will happen when you click the add button
       if(notEmpty){
           var d = new Date();
-          this.state.noteArray.push({
+          /**this.state.noteArray.push({
             'date': d.getFullYear() + "/" + (d.getMonth() + 1) +
             "/" + d.getDate(),
             "note" : this.state.noteText
-          })
+          })**/
           this.setState(
             prevState => {
               let {noteArray, noteText} = prevState;
@@ -69,41 +76,57 @@ export default class Todo extends Component {
     );
   };
 
+  componentDidMount() {
+  Keyboard.addListener(
+    isAndroid ? "keyboardDidShow" : "keyboardWillShow",
+    e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
+  );
 
-  render(){
+  Keyboard.addListener(
+    isAndroid ? "keyboardDidHide" : "keyboardWillHide",
+    () => this.setState({ viewPadding: viewPadding })
+  );
 
-    let notes = this.state.noteArray.map((val, key) => {
-      return <Note key={key} keyVal={key} val={val}
-            deleteMethod={() => this.deleteNote(key)} />
-    })
-    return (
-        <View style={styles.container}>
-          <View style={styles.header}>
-              <Text style={styles.headerText}>Todo</Text>
-          </View>
+  Tasks.all(noteArray => this.setState({ noteArray: noteArray || [] }));
+}
 
-          <ScrollView style={styles.scrollContainer}>
-              {notes}
-          </ScrollView>
+render() {
+   return (
+     <View
+       style={[styles.container, { paddingBottom: this.state.viewPadding }]}
+     >
+     <View style={styles.header}>
+        <Text style={styles.headerText}> Todo </Text>
+      </View>
+       <FlatList
+         style={styles.list}
+         data={this.state.noteArray}
+         renderItem={({ item, index }) =>(
+           <View >
 
+             <View style={styles.listItemCont}>
+               <Text style={styles.listItem}>
+                 {item.noteText}
+               </Text>
 
-          <TextInput
-              style={styles.textInput}
-              onChangeText={(noteText) => this.setState({noteText})}
-              value={this.state.noteText}
-              placeholder=">note"
-              placeholderTextColor="white"
-              underlineColorAndroid="transparent">
-          </TextInput>
+             </View>
 
-        <TouchableOpacity onPress={this.addNote.bind(this)} style={styles.addButton}>
-            <Text style={styles.addButtonText}>+</Text>
-        </TouchableOpacity>
-        </View>
-    );
-  }
-
-
+           </View>
+        ) }
+        keyExtractor={(item) => item.toString()}
+       />
+       <TextInput
+         style={styles.textInput}
+         onChangeText={this.changeTextHandler}
+         onSubmitEditing={this.addNote}
+         value={this.state.noteText}
+         placeholder="Add Tasks"
+         returnKeyType="done"
+         returnKeyLabel="done"
+       />
+     </View>
+   );
+ }
 }
 
 
@@ -114,7 +137,7 @@ let Tasks = {
     );
   },
   convertToStringWithSeparators(noteArray) {
-    return noteArray.map(note=> note.noteText).join("||");
+    return noteArray.map(note => note.noteText).join("||");
   },
   all(callback) {
     return AsyncStorage.getItem("TASKS", (err, noteArray) =>
@@ -129,8 +152,33 @@ let Tasks = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
+  flex: 1,
+},
+list: {
+  width: "100%"
+},
+listItem: {
+  paddingTop: 2,
+  paddingBottom: 2,
+  fontSize: 18
+},
+hr: {
+  height: 1,
+  backgroundColor: "gray"
+},
+listItemCont: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between"
+},
+textInput: {
+  height: 40,
+  paddingRight: 10,
+  paddingLeft: 10,
+  borderColor: "gray",
+  borderWidth: isAndroid ? 0 : 1,
+  width: "100%"
+},
 
   header: {
     backgroundColor: '#4d79ff',
