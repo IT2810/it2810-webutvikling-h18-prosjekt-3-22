@@ -4,9 +4,9 @@ import renderer from 'react-test-renderer'
 import Todo from '../src/components/todo.js';
 
 //creates snapshots from todo-component
-describe('Take snapshot of ToDo', () => {
-    const snap = renderer.create( <
-      Todo / >
-    ).toJSON();
-    expect(snap).toMatchSnapshot();
+test('Take snapshot of ToDo', () => {
+  const snap = renderer.create( <
+    Todo / >
+  ).toJSON();
+  expect(snap).toMatchSnapshot();
 });
