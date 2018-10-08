@@ -1,12 +1,12 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer'
-import Home from '../src/components/home.js';
+import Goal from '../src/components/goal.js';
 
-//creates snapshots from home-component
-describe('Take snapshot of home', () => {
+//creates snapshots from goal-component
+describe('Take snapshot of Goal', () => {
     const snap = renderer.create( <
-      Home / >
+      Goal / >
     ).toJSON();
     expect(snap).toMatchSnapshot();
 });

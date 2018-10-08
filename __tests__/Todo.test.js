@@ -1,12 +1,12 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer'
-import Home from '../src/components/home.js';
+import Todo from '../src/components/todo.js';
 
-//creates snapshots from home-component
-describe('Take snapshot of home', () => {
+//creates snapshots from todo-component
+describe('Take snapshot of ToDo', () => {
     const snap = renderer.create( <
-      Home / >
+      Todo / >
     ).toJSON();
     expect(snap).toMatchSnapshot();
 });
