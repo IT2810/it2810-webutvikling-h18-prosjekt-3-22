@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Take snapshot of ToDo 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Details Screenkk
-  </Text>
-</View>
-`;
-
 exports[`ToDo-page test Take snapshot of todo-component 1`] = `
 <View
   style={
@@ -76,6 +56,7 @@ exports[`ToDo-page test Take snapshot of todo-component 1`] = `
         "padding": 20,
       }
     }
+    testID="addTaskInput"
     value=""
   />
 </View>

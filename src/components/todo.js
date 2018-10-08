@@ -123,6 +123,7 @@ render() {
          placeholder="Add Tasks"
          returnKeyType="done"
          returnKeyLabel="done"
+         testID={'addTaskInput'}
        />
      </View>
    );

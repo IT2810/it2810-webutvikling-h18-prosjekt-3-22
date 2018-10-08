@@ -5,7 +5,6 @@ import Goal from '../src/components/goal.js';
 
 let findSteps = function (tree, element) {
   let result = undefined;
-  //let pageStepGoal = tree.children[1].children[3];
   let steps = tree.children[1];
   for (node in steps.children) {
     if (steps.children[node] == element) {
@@ -35,6 +34,7 @@ describe('Goal-page test', () => {
   });
   test('Verify that stepgoal is 10000', () => {
     let stepGoal = 10000;
+    //console.log(tree.children[1].children[3])
     expect(findSteps(tree, stepGoal)).toBe(true);
   });
   test('Verify that steps taken today is 0', () => {

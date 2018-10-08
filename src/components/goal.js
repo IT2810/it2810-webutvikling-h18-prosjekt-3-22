@@ -8,7 +8,7 @@ class Goal extends Component {
   state = {
     isPedometerAvailable: "checking",
     pastStepCount: 0,
-    stepGoal: this.getStepGoal,
+    stepGoal: 10000,
     newGoal: 0
   }
 
@@ -136,6 +136,7 @@ class Goal extends Component {
             onChangeText={newInput => {this.setState({newGoal: newInput})}}
             onSubmitEditing={() => this.onSubmit(this.state.newGoal)}
             clearButtonMode={"always"}
+            testID={'goalInput'}
             >
           </TextInput>
       </View>
