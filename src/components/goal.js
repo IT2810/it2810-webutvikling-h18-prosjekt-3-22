@@ -3,13 +3,15 @@ import {Expo} from "expo";
 import {Pedometer} from "expo";
 import { Alert, StyleSheet, Text, View, TextInput} from 'react-native';
 import { AsyncStorage } from "react-native";
+import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 class Goal extends Component {
   state = {
     isPedometerAvailable: "checking",
     pastStepCount: 0,
     stepGoal: 10000,
-    newGoal: 0
+    newGoal: 0,
+    reached: false
   }
 
   componentDidMount(){
@@ -35,22 +37,29 @@ class Goal extends Component {
     );
 
     //get number of steps walked today
-    const end = new Date();
-    const start = new Date(end.getFullYear(), end.getMonth(), end.getDay(), 0, 0, 0, 0);
+      this.getSteps()
 
-    Pedometer.getStepCountAsync(start, end).then(
-        result => {
-          this.setState({
-              pastStepCount: result.steps,
-          });
-        }
-    );
+    //get step goal
       this.getStepGoal()
   };
 
   _unsubscribe = () => {
     this._subscription && this._subscription.remove();
     this._subscription = null;
+  }
+
+  getSteps = () => {
+      const end = new Date();
+      const start = new Date();
+      start.setHours(0,0,0,0);
+
+      Pedometer.getStepCountAsync(start, end).then(
+          result => {
+              this.setState({
+                  pastStepCount: result.steps,
+              });
+          }
+      );
   }
 
   // fires when a new goal is set by user
@@ -106,27 +115,40 @@ class Goal extends Component {
 
   render() {
       const stepsLeft = this.state.stepGoal - this.state.pastStepCount;
-      const reachedGoal = <Text>You have reached your daily goal!</Text>;
-      const notGoal = <Text>Walk {stepsLeft} steps to reach your goal.</Text>;
+      const reachedGoal = <Text style={styles.text}>You have reached your daily goal!</Text>;
+      const notGoal = <Text style={styles.text}>Walk {stepsLeft} steps to reach your goal.</Text>;
 
     let message;
     if (this.state.pastStepCount >= this.state.stepGoal){
-        message = reachedGoal
+        message = reachedGoal;
+        this.state.reached = true;
     } else {
-        message = notGoal
+        message = notGoal;
+        this.state.reached = false;
     };
 
     return (
       <View style={{ flex: 1, alignItems: 'center' }}>
-        <Text style={{padding: 10, fontSize: 42}}>Goal</Text>
+          <View style={styles.header}>
+              <Text style={styles.headerText}> Goal </Text>
+          </View>
 
-          <Text style={{marginBottom: 10}}>
-              Steps taken today: {this.state.pastStepCount}/{this.state.stepGoal}
-          </Text>
+          <View>
+              <Text style={styles.text}>
+                  Steps taken today
+              </Text>
+          </View>
+
+          <View style={[styles.circleView, this.state.reached && styles.circleGreen]}>
+              <FontAwesome>{Icons.trophy}</FontAwesome>
+              <Text style={{marginBottom: 10}}>
+                  {this.state.pastStepCount}/{this.state.stepGoal}
+              </Text>
+          </View>
 
           <View>{message}</View>
 
-          <Text style={{marginTop: 30}}>
+          <Text style={{marginTop: 60}}>
               Set a new daily goal
           </Text>
 
@@ -142,5 +164,40 @@ class Goal extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+    header: {
+        backgroundColor: '#4d79ff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderBottomWidth: 10,
+        borderBottomColor: "#ddd",
+        width: '100%'
+    },
+
+    headerText: {
+        color: 'white',
+        fontSize: 18,
+        padding: 26,
+    },
+
+    circleView: {
+        width: 150,
+        height: 150,
+        borderRadius: 150/2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
+        backgroundColor: 'skyblue'
+    },
+
+    circleGreen: {
+        backgroundColor: 'lightgreen'
+    },
+
+    text: {
+        marginTop: 20
+    }
+});
 
 export default Goal;
