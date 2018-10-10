@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
-
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   AppRegistry,
   StyleSheet,
@@ -10,7 +11,6 @@ import {
   ScrollView,
   View,
   FlatList,
-  Button,
   Keyboard,
   Platform,
   TouchableOpacity
@@ -28,7 +28,6 @@ export default class Todo extends Component {
       noteText: '',
     }
   }
-
 
   changeTextHandler = noteText => {
     this.setState({ noteText: noteText });
@@ -108,9 +107,17 @@ render() {
                <Text style={styles.listItem}>
                  {item.noteText}
                </Text>
+               <Button
+                   title=''
+                   icon={{name: 'trash-o', type: 'font-awesome', size: 28}}
+                   onPress={() => this.deleteNote(index)}
+                   buttonStyle={{
+                         backgroundColor: "#ff9999",
+                       }}
+                />
+
 
              </View>
-
            </View>
         ) }
         keyExtractor={(item) => item.toString()}
@@ -125,6 +132,7 @@ render() {
          returnKeyLabel="done"
          testID={'addTaskInput'}
        />
+
      </View>
    );
  }
@@ -163,15 +171,14 @@ listItem: {
   paddingBottom: 2,
   fontSize: 18
 },
-hr: {
-  height: 1,
-  backgroundColor: "gray"
-},
+
 listItemCont: {
   flexDirection: "row",
   alignItems: "center",
-  justifyContent: "space-between"
+  justifyContent: "space-between",
+  margin: 10
 },
+
 textInput: {
   height: 40,
   paddingRight: 10,
@@ -234,6 +241,16 @@ textInput: {
   addButtonText: {
     color: "#fff",
     fontSize: 25,
+  },
+
+  noteDelete: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    top: 10,
+    bottom: 10,
+    right: 10,
   },
 
 
