@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
-
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Home extends Component {
   render() {
@@ -25,9 +24,6 @@ class Home extends Component {
             />
         </View>
       </View>
-
-
-
     );
   }
 }
