@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToDo-page test Take snapshot of todo-component 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "paddingBottom": undefined,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#4d79ff",
+        "borderBottomColor": "#ddd",
+        "borderBottomWidth": 10,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 18,
+          "padding": 26,
+        }
+      }
+    >
+       Todo 
+    </Text>
+  </View>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="Add Tasks"
+    returnKeyLabel="done"
+    returnKeyType="done"
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "backgroundColor": "#252525",
+        "borderTopColor": "#ededed",
+        "borderTopWidth": 2,
+        "color": "#fff",
+        "padding": 20,
+      }
+    }
+    testID="addTaskInput"
+    value=""
+  />
+</View>
+`;

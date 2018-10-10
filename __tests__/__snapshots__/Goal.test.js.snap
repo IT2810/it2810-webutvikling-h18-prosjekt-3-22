@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Goal-page test Take snapshot of goal-component 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "fontSize": 42,
+        "padding": 10,
+      }
+    }
+  >
+    Goal
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "marginBottom": 10,
+      }
+    }
+  >
+    Steps taken today: 
+    0
+    /
+    10000
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Walk 
+      10000
+       steps to reach your goal.
+    </Text>
+  </View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "marginTop": 30,
+      }
+    }
+  >
+    Set a new daily goal
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    clearButtonMode="always"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="10 000 steps"
+    style={
+      Object {
+        "borderColor": "gray",
+        "borderWidth": 1,
+        "height": 50,
+        "marginTop": 10,
+        "padding": 15,
+        "textAlign": "center",
+        "width": "80%",
+      }
+    }
+    testID="goalInput"
+  />
+</View>
+`;
