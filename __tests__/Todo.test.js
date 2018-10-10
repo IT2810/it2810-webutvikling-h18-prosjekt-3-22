@@ -21,8 +21,7 @@ describe('ToDo-page test', () => {
     expect(tree).toMatchSnapshot();
   });
   test('Verify that Add task-button is available', async () => {
-    //await console.log(tree.children[1].props.testID)
-    expect(findElement(tree, 'addTaskInput')).toBe(true);
+    await expect(findElement(tree, 'addTaskInput')).toBe(true);
   });
 
 });
