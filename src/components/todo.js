@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -91,48 +90,41 @@ export default class Todo extends Component {
 
 render() {
    return (
-     <View
-       style={[styles.container, { paddingBottom: this.state.viewPadding }]}
-     >
-     <View style={styles.header}>
+    <View style={[styles.container, { paddingBottom: this.state.viewPadding }]}>
+      <View style={styles.header}>
         <Text style={styles.headerText}> Todo </Text>
       </View>
-       <FlatList
-         style={styles.list}
-         data={this.state.noteArray}
-         renderItem={({ item, index }) =>(
-           <View >
-
-             <View style={styles.listItemCont}>
-               <Text style={styles.listItem}>
-                 {item.noteText}
-               </Text>
-               <Button
-                   title=''
-                   icon={{name: 'trash-o', type: 'font-awesome', size: 28}}
-                   onPress={() => this.deleteNote(index)}
-                   buttonStyle={{
-                         backgroundColor: "#ff9999",
-                       }}
+      <FlatList
+        style={styles.list}
+        data={this.state.noteArray}
+        renderItem={({ item, index }) =>( 
+            <View style={styles.listItemCont}>
+              <Text style={styles.listItem}>
+                  {item.noteText}
+              </Text>
+              <Button
+                  title=''
+                  icon={{name: 'trash-o', type: 'font-awesome', size: 28}}
+                  onPress={() => this.deleteNote(index)}
+                  buttonStyle={{
+                        backgroundColor: "#ff9999",
+                      }}
                 />
-
-
-             </View>
-           </View>
+            </View>
         ) }
         keyExtractor={(item) => item.toString()}
-       />
-       <TextInput
-         style={styles.textInput}
-         onChangeText={this.changeTextHandler}
-         onSubmitEditing={this.addNote}
-         value={this.state.noteText}
-         placeholder="Add Tasks"
-         returnKeyType="done"
-         returnKeyLabel="done"
-       />
-
-     </View>
+      />
+      <TextInput
+        style={styles.textInput}
+        onChangeText={this.changeTextHandler}
+        onSubmitEditing={this.addNote}
+        value={this.state.noteText}
+        placeholder="Add Tasks"
+        returnKeyType="done"
+        returnKeyLabel="done"
+        testID={'addTaskInput'}
+      />
+    </View>
    );
  }
 }
