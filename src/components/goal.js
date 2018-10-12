@@ -3,7 +3,6 @@ import {Expo} from "expo";
 import {Pedometer} from "expo";
 import { Alert, StyleSheet, Text, View, TextInput} from 'react-native';
 import { AsyncStorage } from "react-native";
-import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 class Goal extends Component {
   state = {
@@ -140,7 +139,6 @@ class Goal extends Component {
           </View>
 
           <View style={[styles.circleView, this.state.reached && styles.circleGreen]}>
-              <FontAwesome>{Icons.trophy}</FontAwesome>
               <Text style={{marginBottom: 10}}>
                   {this.state.pastStepCount}/{this.state.stepGoal}
               </Text>
@@ -192,7 +190,7 @@ const styles = StyleSheet.create({
     },
 
     circleGreen: {
-        backgroundColor: 'lightgreen'
+        backgroundColor: '#7ED957'
     },
 
     text: {
