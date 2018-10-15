@@ -60,7 +60,9 @@ export default class Appointments extends Component {
         deletedRowKey: activeKey
       };
     });
+    this.refs.flatList.scrollToEnd();
   }
+
   _onPressAdd(){
     this.refs.addModal.showAddModal();
   }
