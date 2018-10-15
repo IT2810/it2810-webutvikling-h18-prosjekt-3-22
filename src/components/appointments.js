@@ -25,7 +25,24 @@ const styles = StyleSheet.create({
         color: 'white',
         padding: 10,
         fontSize: 16,
-    }
+    },
+    header: {
+      backgroundColor: '#4d79ff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderBottomWidth: 10,
+      borderBottomColor: "#ddd",
+    },
+
+    headerText: {
+      color: 'white',
+      fontSize: 18,
+      padding: 26,
+    },
+    
+    container: {
+    flex: 1,
+  },
 });
 
 export default class Appointments extends Component {
@@ -38,21 +55,17 @@ export default class Appointments extends Component {
   }
     render() {
       return (
-        <View style={{flex: 1, marginTop: 22}}>
-        <View style={{
-         backgroundColor: 'tomato',
-         flexDirection: 'row',
-         justifyContent:'flex-end',
-         alignItems: 'center',
-         height: 64}}>
+        <View style={styles.container}>
+        <View style={styles.header}>
+           <Text style={styles.headerText}> Todo </Text>
          <TouchableHighlight
              style={{marginRight: 10}}
              underlayColor='tomato'
              onPress={this._onPressAdd}
              >
-             <Text>ggg</Text>
-     </TouchableHighlight>
-     </View>
+             <Text>+</Text>
+          </TouchableHighlight>
+        </View>
             <FlatList
                 ref={"flatList"}
                 data={flatListData}

@@ -20,6 +20,7 @@ export default class AddModal extends Component{
         };
     }
 
+
   showAddModal = () => {
     this.refs.myModal.open();
   }
