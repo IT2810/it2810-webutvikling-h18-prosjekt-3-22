@@ -25,6 +25,10 @@ export default class AddModal extends Component{
     this.refs.myModal.open();
   }
 
+  generateKey = (numberOfCharacters) => {
+       return require('random-string')({length: numberOfCharacters});
+   }
+
   render(){
     return(
       <Modal
@@ -89,7 +93,7 @@ export default class AddModal extends Component{
                     }}
                     onPress={() => {
                          if (this.state.newFoodName.length == 0 || this.state.newDate.length == 0) {
-                            alert("You must enter food's name and description");
+                            alert("You must enter task name and description");
                             return;
                         }
                         const newKey = this.generateKey(24);

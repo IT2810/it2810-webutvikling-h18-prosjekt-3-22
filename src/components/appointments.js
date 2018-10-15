@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       padding: 26,
     },
-    
+
     container: {
     flex: 1,
   },
@@ -48,7 +48,18 @@ const styles = StyleSheet.create({
 export default class Appointments extends Component {
   constructor(props){
     super(props);
+    this.state = ({
+      deletedRowKey: null,
+    })
     this._onPressAdd = this._onPressAdd.bind(this);
+  }
+
+  refreshFlatList = (activeKey) =>{
+    this.setState((prevState) => {
+      return{
+        deletedRowKey: activeKey
+      };
+    });
   }
   _onPressAdd(){
     this.refs.addModal.showAddModal();
@@ -57,7 +68,7 @@ export default class Appointments extends Component {
       return (
         <View style={styles.container}>
         <View style={styles.header}>
-           <Text style={styles.headerText}> Todo </Text>
+           <Text style={styles.headerText}> Appointments </Text>
          <TouchableHighlight
              style={{marginRight: 10}}
              underlayColor='tomato'
