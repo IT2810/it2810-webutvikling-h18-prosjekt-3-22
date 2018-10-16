@@ -12,16 +12,20 @@ class Home extends Component {
         <View style={{flex:1 , marginTop:100, width:200}} >
             <Text>Home Screen</Text>
             <Button
-            title={`To do`}
+            title={`✅ To do`}
             onPress={() => this.props.navigation.navigate('Todo')}
-            icon={{name: 'check-square-o', type: 'font-awesome', size: 60}}
             />
         </View>
         <View style={{flex:1 , marginBottom:100, width:200}} >
             <Button
             onPress={() => this.props.navigation.navigate('Goal')}
-            icon={{name: 'flag', type: 'font-awesome', size: 60}}
-            title={`Goal`}
+            title={`🏆 Goal`}
+            />
+        </View>
+        <View style={{flex:1 , marginBottom:100, width:200}} >
+            <Button
+              onPress={() => this.props.navigation.navigate('ContactHome')}
+              title={`👥 Contacts`}
             />
         </View>
       </View>
