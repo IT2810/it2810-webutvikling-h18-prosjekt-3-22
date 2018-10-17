@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Modal, AsyncStorage, Alert, FlatList} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, Modal, AsyncStorage, Alert, FlatList, ScrollView} from 'react-native';
 
 class ContactHome extends Component {
 
@@ -17,6 +17,10 @@ class ContactHome extends Component {
 
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
+    }
+
+    componentDidMount(){
+        Tasks.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
     }
 
     newContact = () => {
@@ -39,6 +43,8 @@ class ContactHome extends Component {
             newMail: "",
             refresh: true}
         )
+
+        Tasks.saveContacts(this.state.contactArray)
     };
 
     viewDetails=(item)=>{
@@ -49,19 +55,24 @@ class ContactHome extends Component {
         Alert.alert(name, ('Number: ' + number + '\n' + 'Mail: '+ mail));
     };
 
-    render () {
-        return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}> Contacts </Text>
-                </View>
+    deleteContact = index => {
+        this.setState(
+            prevState => {
+                let contactArray = prevState.contactArray.slice();
+                contactArray.splice(index, 1);
 
-            {/*Modal opens when user click the add contact button*/}
-                <View style={{marginTop: 22}}>
-                <Modal
+                return {contactArray: contactArray};
+            },
+            () => Tasks.saveContacts(this.state.contactArray)
+        );
+    };
+
+    drawModal = () => {
+        return (
+            <Modal
                 animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                }}>
+                Alert.alert('Modal has been closed.');
+            }}>
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <Text style={styles.headerText}> Add new contact </Text>
@@ -94,52 +105,67 @@ class ContactHome extends Component {
                         </Button>
                     </View>
                 </View>
-                </Modal>
-            {/*End modal*/}
-                <View style={{}}>
-                    <View style={{marginBottom: 10}}>
-                        <FlatList
-                        data={this.state.contactArray}
-                        renderItem={({item}) => (
-                            <View style={styles.textBox}>
-                            <Text style={styles.textStyle} onPress={ this.viewDetails.bind(this, item) }> { item[0] } </Text>
-                            </View>
-                        )}
-                        keyExtractor={(item) => item}
-                        refreshing={this.state.refresh}/>
-                    </View>
+            </Modal>
+        )
+    };
 
-
-                    <View style={styles.addBtn}>
-                        <Button title={"Add contact"}
-                            onPress={() => {
-                                this.setModalVisible(true);
-                            }}>
-                        </Button>
-                    </View>
+    render () {
+        return (
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}> Contacts </Text>
                 </View>
 
+                {this.drawModal()}
+
+                <ScrollView style={{flex:1, marginBottom:10}}>
+                    <FlatList
+                    data={this.state.contactArray}
+                    renderItem={({item, index}) => (
+                        <View key={index} style={styles.textBox}>
+                            <View style={styles.boxName}>
+                                <Text style={styles.textStyle} onPress={ this.viewDetails.bind(this, item) }> { item[0] } </Text>
+                            </View>
+                            <View style={styles.boxDelete}>
+                                <Text style={{fontSize: 20}} onPress={() => this.deleteContact(index)}>✖</Text>
+                            </View>
+                        </View>
+                    )}
+                    keyExtractor={(item) => item}
+                    refreshing={this.state.refresh}/>
+                </ScrollView>
+
+                <Button title={"Add contact"} onPress={() => {
+                    this.setModalVisible(true);}}>
+                </Button>
             </View>
-        </View>
         );
     }
-
 }
 
 let Tasks = {
-    saveContacts() {
-        //AsyncStorage.setItem("CONTACTS", this.state.contactArray);
+    convertToArrayOfObject(contactArray, callback) {
+        return callback(
+            contactArray ? contactArray.split("||").map((contact) => ({contact})) : []
+        );
     },
-
-    loadContacts() {
-        return AsyncStorage.getItem("CONTACTS", contactArray);
-        this.state.contactArray = contactArray
+    convertToStringWithSeparators(contactArray) {
+        return contactArray.map(contact => contact.noteText).join("||");
+    },
+    loadContacts(callback) {
+        return AsyncStorage.getItem("CONTACTS", (err, contactArray) =>
+            this.convertToArrayOfObject(contactArray, callback)
+        );
+    },
+    saveContacts(contactArray) {
+        AsyncStorage.setItem("CONTACTS", this.convertToStringWithSeparators(contactArray));
     }
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex:1,
+        paddingBottom: 15
     },
 
     header: {
@@ -148,7 +174,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderBottomWidth: 10,
         borderBottomColor: "#ddd",
-        width: '100%'
+        width: '100%',
+        marginBottom:10
     },
 
     headerText: {
@@ -182,13 +209,28 @@ const styles = StyleSheet.create({
     },
 
     textBox: {
-        marginBottom: 10,
-        padding: 5,
-        backgroundColor: "skyblue",
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 10,
-        marginLeft: 10
+        marginLeft: 10,
+        marginBottom:10,
+        flexDirection: 'row',
+        height: 50
+    },
+
+    boxName: {
+        width: '80%',
+        height: '100%',
+        backgroundColor: "skyblue",
+
+    },
+
+    boxDelete: {
+        width: '20%',
+        height: '100%',
+        backgroundColor: "lightgrey",
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     textStyle: {
@@ -198,10 +240,6 @@ const styles = StyleSheet.create({
         width: '100%',
         fontWeight: '600'
     },
-
-    addBtn: {
-
-    }
 });
 
 export default ContactHome;
