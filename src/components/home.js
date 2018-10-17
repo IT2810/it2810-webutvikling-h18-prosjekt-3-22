@@ -1,80 +1,62 @@
 import React, { Component } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
-
-
+import { StyleSheet} from 'react-native';
+import {
+  Container,
+  Content,
+  Button,
+  Icon,
+  Text
+} from "native-base";
 
 class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-          <Text style={styles.title}>
-            P.I.M.M.
-          </Text>
-          <View style={styles.todo}>
-            <Button
-            onPress={() => this.props.navigation.navigate('Todo')}
-            title={`✅ To do`}
-            testID={'toDoBtn'}
-            />
-        </View>
-        <View style={styles.goal} >
-            <Button
-            onPress={() => this.props.navigation.navigate('Goal')}
-            title={`🏆 Goal`}
-            testID={'goalBtn'}
-            />
-        </View>
-        <View style={styles.contacts} >
-            <Button
-              onPress={() => this.props.navigation.navigate('ContactHome')}
-              title={`👥 Contacts`}
-              testID= {'contactsBtn'}
-            />
-        </View>
-      </View>
+      /**Vi hadde planer om å bruke ikoner fra react-native-vector-icons, men dette funket av en eller annen grunn ikke.
+      Vi var på sal, men ingen av de som satt der klarte å fikse det og ga oss dermed forslaget om å bruke emojies isteden.
+      **/
+      <Container style={styles.container}>
+            <Content styles={styles.content}>
+                <Button light style={styles.mb15}
+                testID={'toDoBtn'}
+                onPress={() => this.props.navigation.navigate('Todo')}>
+                <Text uppercase={false} style={styles.text}>✔️     Todo</Text>
+                </Button>
+                <Button light style={[styles.mb15, styles.box]}
+                testID={'goalBtn'}
+                onPress={() => this.props.navigation.navigate('Goal')}>
+                <Text uppercase={false} style={styles.text}>🏆     Goal</Text>
+                </Button>
+                <Button light style={styles.mb15}
+                testID= {'contactsBtn'}
+                onPress={() => this.props.navigation.navigate('Goal')}>
+                <Text uppercase={false} style={styles.text}>☎️     Contacts</Text>
+                </Button>
+            </Content>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
-    //backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    //margin: 100,
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 30,
-    marginTop: 75,
-  },
-  todo: {
-    flex: 1,
-    marginTop: 50,
-    width: 300,
-    //height: 400,
-  },
-  goal: {
-    flex: 1,
-    //marginBottom: 100,
-    width: 300,
-  },
-  contacts: {
-    flex: 1,
-    marginBottom: 100,
-    width: 300,
-  }
+    paddingTop: 70,
+},
+  mb15: {
+   marginBottom: 20,
+   width: 300,
+   height: 100,
+   alignItems: 'center',
+  justifyContent: 'flex-start'
+ },
 
-/** This doesn't work??
-  button: {
-    backgroundColor: '#ffccff',
-    borderRadius: 10,
-    width:600,
-    height: 110,
-    //color: 'black',
-  },**/
-});
+ text: {
+   fontSize: 30,
+
+ }
+}
+);
 
 export default Home
