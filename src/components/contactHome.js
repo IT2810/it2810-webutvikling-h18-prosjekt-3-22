@@ -80,25 +80,25 @@ class ContactHome extends Component {
 
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
-                            <Text style={styles.inputText}>Name:</Text>
+                            <Text style={styles.inputText} testID={'nameInput'}>Name:</Text>
                             <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
-                            <Text style={styles.inputText}>Number:</Text>
+                            <Text style={styles.inputText} testID={'numberInput'}>Number:</Text>
                             <TextInput placeholder={"123456789"} onChangeText={input => this.setState({newNumber: input})}/>
                         </View>
                         <View style={styles.input}>
-                            <Text style={styles.inputText}>Mail:</Text>
+                            <Text style={styles.inputText} testID={'mailInput'}>Mail:</Text>
                             <TextInput placeholder={"ola@gmail.com"} onChangeText={input => this.setState({newMail: input})}/>
                         </View>
                     </View>
 
                     <View style={styles.btnWrapper}>
-                        <Button title={"✖Close"} onPress={() => {
+                        <Button title={"✖Close"} testID={'closeBtn'} onPress={() => {
                             this.setModalVisible(!this.state.modalVisible);
                         }}>
                         </Button>
-                        <Button title={"✔Save"} onPress={() => {
+                        <Button title={"✔Save"} testID={'saveBtn'} onPress={() => {
                             this.newContact();
                             this.setModalVisible(!this.state.modalVisible);
                         }}>
@@ -135,7 +135,7 @@ class ContactHome extends Component {
                     refreshing={this.state.refresh}/>
                 </ScrollView>
 
-                <Button title={"Add contact"} onPress={() => {
+                <Button title={"Add contact"} testID={'addContactBtn'} onPress={() => {
                     this.setModalVisible(true);}}>
                 </Button>
             </View>
