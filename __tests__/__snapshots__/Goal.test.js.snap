@@ -9,39 +9,88 @@ exports[`Goal-page test Take snapshot of goal-component 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+  <View
     style={
       Object {
-        "fontSize": 42,
-        "padding": 10,
+        "alignItems": "center",
+        "backgroundColor": "#4d79ff",
+        "borderBottomColor": "#ddd",
+        "borderBottomWidth": 10,
+        "justifyContent": "center",
+        "width": "100%",
       }
     }
   >
-    Goal
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "marginBottom": 10,
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 18,
+          "padding": 26,
+        }
       }
-    }
-  >
-    Steps taken today: 
-    0
-    /
-    10000
-  </Text>
+    >
+       Goal 
+    </Text>
+  </View>
   <View>
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "marginTop": 20,
+        }
+      }
+    >
+      Steps taken today
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "skyblue",
+          "borderRadius": 75,
+          "height": 150,
+          "justifyContent": "center",
+          "marginTop": 10,
+          "width": 150,
+        },
+        false,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      0
+      /
+      10000
+    </Text>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "marginTop": 20,
+        }
+      }
     >
       Walk 
       10000
@@ -54,7 +103,7 @@ exports[`Goal-page test Take snapshot of goal-component 1`] = `
     ellipsizeMode="tail"
     style={
       Object {
-        "marginTop": 30,
+        "marginTop": 60,
       }
     }
   >

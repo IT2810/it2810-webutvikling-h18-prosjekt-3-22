@@ -5,7 +5,10 @@ import Goal from '../src/components/goal.js';
 
 let findSteps = function (tree, element) {
   let result = undefined;
-  let steps = tree.children[1];
+  let steps = tree.children[2].children[0];
+  //need these in case there are changes in files later on
+  /*   let stepGoal = tree.children[2].children[0].children[2];
+    let stepStart = tree.children[2].children[0].children[0]; */
   for (node in steps.children) {
     if (steps.children[node] == element) {
       result = true;
@@ -24,7 +27,6 @@ let findInput = function (tree, element) {
   return result;
 }
 
-//creates snapshots from goal-component
 describe('Goal-page test', () => {
   const tree = renderer.create( <
     Goal / >
@@ -34,7 +36,6 @@ describe('Goal-page test', () => {
   });
   test('Verify that stepgoal is 10000', () => {
     let stepGoal = 10000;
-    //console.log(tree.children[1].children[3])
     expect(findSteps(tree, stepGoal)).toBe(true);
   });
   test('Verify that steps taken today is 0', () => {
