@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Modal, AsyncStorage, Alert, FlatList, ScrollView} from 'react-native';
+import { AppRegistry, StyleSheet, Text, TextInput, View, Button, Modal, AsyncStorage, Alert, FlatList, ScrollView} from 'react-native';
 
-class ContactHome extends Component {
+export default class ContactHome extends Component {
 
     constructor (){
         super();
@@ -15,7 +15,7 @@ class ContactHome extends Component {
         }
     }
 
-    setModalVisible(visible) {
+    setModalVisible = visible => {
         this.setState({modalVisible: visible});
     }
 
@@ -35,8 +35,22 @@ class ContactHome extends Component {
         contact[2] = this.state.newMail;
 
         let oldArray = this.state.contactArray;
+        this.setState(
+          prevState => {
+            let {contactArray, newName} = prevState;
+            return {
+              //This will display the text
+              //contactArray: oldArray.concat([contact]),
 
-        this.setState({
+              //This will store the newName in AsyncStorage, but not display text
+              contactArray: oldArray.concat({key: contactArray.length, newName: newName}),
+              newName: ""
+            };
+          },
+              () => Tasks.saveContacts(this.state.contactArray)
+        );
+
+      /**  this.setState({
             contactArray: oldArray.concat([contact]),
             newName: "",
             newNumber: "",
@@ -45,8 +59,8 @@ class ContactHome extends Component {
         )
 
         Tasks.saveContacts(this.state.contactArray)
-    };
-
+    };**/
+}
     viewDetails=(item)=>{
         let name = item[0];
         let number = item[1];
@@ -146,11 +160,11 @@ class ContactHome extends Component {
 let Tasks = {
     convertToArrayOfObject(contactArray, callback) {
         return callback(
-            contactArray ? contactArray.split("||").map((contact) => ({contact})) : []
+            contactArray ? contactArray.split("||").map((contact, i) => ({key: i, newName: contact})) : []
         );
     },
     convertToStringWithSeparators(contactArray) {
-        return contactArray.map(contact => contact.noteText).join("||");
+        return contactArray.map(contact => contact.newName).join("||");
     },
     loadContacts(callback) {
         return AsyncStorage.getItem("CONTACTS", (err, contactArray) =>
@@ -242,4 +256,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ContactHome;
+AppRegistry.registerComponent("ContactHome", () => ContactHome);
