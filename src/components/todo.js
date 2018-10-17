@@ -248,4 +248,4 @@ textInput: {
 });
 
 
-AppRegistry.registerComponent("Todo", () => Todo);
+AppRegistry.registerComponent("prosjekt3", () => Todo);
