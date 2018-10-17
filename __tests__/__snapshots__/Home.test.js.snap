@@ -10,22 +10,29 @@ exports[`Home-page test Take snapshot of home 1`] = `
     }
   }
 >
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "fontSize": 30,
+        "marginTop": 75,
+        "textAlign": "center",
+      }
+    }
+  >
+    P.I.M.M.
+  </Text>
   <View
     style={
       Object {
         "flex": 1,
-        "marginTop": 100,
-        "width": 200,
+        "marginTop": 50,
+        "width": 300,
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Home Screen
-    </Text>
     <View
       style={
         Array [
@@ -83,33 +90,6 @@ exports[`Home-page test Take snapshot of home 1`] = `
         >
           <Text
             accessible={true}
-            allowFontScaling={false}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "white",
-                  "fontSize": 60,
-                },
-                Array [
-                  Object {
-                    "marginRight": 10,
-                  },
-                  undefined,
-                ],
-                Object {
-                  "fontFamily": "FontAwesome",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-              ]
-            }
-            type="font-awesome"
-          >
-            
-          </Text>
-          <Text
-            accessible={true}
             allowFontScaling={true}
             ellipsizeMode="tail"
             style={
@@ -142,7 +122,7 @@ exports[`Home-page test Take snapshot of home 1`] = `
               ]
             }
           >
-            To do
+            ✅ To do
           </Text>
         </View>
       </View>
@@ -152,8 +132,7 @@ exports[`Home-page test Take snapshot of home 1`] = `
     style={
       Object {
         "flex": 1,
-        "marginBottom": 100,
-        "width": 200,
+        "width": 300,
       }
     }
   >
@@ -214,31 +193,108 @@ exports[`Home-page test Take snapshot of home 1`] = `
         >
           <Text
             accessible={true}
-            allowFontScaling={false}
+            allowFontScaling={true}
             ellipsizeMode="tail"
             style={
               Array [
-                Object {
-                  "color": "white",
-                  "fontSize": 60,
-                },
+                Object {},
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
                 Array [
                   Object {
-                    "marginRight": 10,
+                    "color": "white",
+                    "fontSize": 20,
                   },
                   undefined,
+                  Object {
+                    "fontSize": 17.5,
+                  },
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
                 ],
-                Object {
-                  "fontFamily": "FontAwesome",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
               ]
             }
-            type="font-awesome"
           >
-            
+            🏆 Goal
           </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "marginBottom": 100,
+        "width": 300,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "marginLeft": 15,
+            "marginRight": 15,
+          },
+          undefined,
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={null}
+        testID="contactsBtn"
+      >
+        <View
+          pointerEvents="box-only"
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#9E9E9E",
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "padding": 19,
+              },
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              Object {
+                "padding": 12,
+              },
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+            ]
+          }
+        >
           <Text
             accessible={true}
             allowFontScaling={true}
@@ -273,7 +329,7 @@ exports[`Home-page test Take snapshot of home 1`] = `
               ]
             }
           >
-            Goal
+            👥 Contacts
           </Text>
         </View>
       </View>
