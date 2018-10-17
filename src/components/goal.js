@@ -89,6 +89,7 @@ class Goal extends Component {
     const saveStepGoal = async stepGoal => {
         try {
             await AsyncStorage.setItem('stepGoal', stepGoal);
+
         } catch (error) {
             alert(error.message);
         }
@@ -102,11 +103,10 @@ class Goal extends Component {
         const getStepGoal = async () => {
             let stepGoal = '';
             try {
-                stepGoal = await AsyncStorage.getItem('stepGoal') || 'none';
+                stepGoal = await AsyncStorage.getItem('stepGoal') || '10000';
                 this.setState({
                   stepGoal: stepGoal
                 })
-              
             } catch (error) {
                 alert(error.message);
             }
