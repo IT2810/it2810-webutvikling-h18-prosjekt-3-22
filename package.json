@@ -11,7 +11,6 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "testEnvironment": "enzyme",
     "testURL": "http://localhost/"
   },
   "dependencies": {
@@ -28,8 +27,6 @@
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "jest": "^23.6.0",
-    "jest-environment-enzyme": "^6.1.2",
-    "jest-enzyme": "^6.1.2",
     "jest-expo": "^30.0.0",
     "react-native-mock": "^0.3.1",
     "react-native-submit-button": "^1.0.5",
