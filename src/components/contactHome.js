@@ -6,9 +6,12 @@ class ContactHome extends Component {
     constructor (){
         super();
         this.state = {
-            contactArray: [["Ola", "123", "@hhi"], ["Kari", "89398", "dj@jkj.no"], ["Jens", "983", "ss@fr.no"]],
+            contactArray: [],
             modalVisible: false,
-            refresh: false
+            refresh: false,
+            newName: "",
+            newNumber: "",
+            newMail: ""
         }
     }
 
@@ -16,21 +19,27 @@ class ContactHome extends Component {
         this.setState({modalVisible: visible});
     }
 
-    newContact = (name, number, mail) => {
+    newContact = () => {
         let contact = [
             "",
             "",
             ""
         ];
 
-        contact[0] = name;
-        contact[1] = number;
-        contact[3] = mail;
+        contact[0] = this.state.newName;
+        contact[1] = this.state.newNumber;
+        contact[2] = this.state.newMail;
 
-        this.state.contactArray.concat({person: contact});
-        this.state.refresh = true
-        //Tasks.save(this.state.contactArray);
-    }
+        let oldArray = this.state.contactArray;
+
+        this.setState({
+            contactArray: oldArray.concat([contact]),
+            newName: "",
+            newNumber: "",
+            newMail: "",
+            refresh: true}
+        )
+    };
 
     viewDetails=(item)=>{
         let name = item[0];
@@ -41,10 +50,6 @@ class ContactHome extends Component {
     };
 
     render () {
-        let newName = "";
-        let newNumber = "";
-        let newMail = "";
-
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -65,15 +70,15 @@ class ContactHome extends Component {
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
                             <Text style={styles.inputText}>Name:</Text>
-                            <TextInput placeholder={"Ola Nordmann"} onChangeText={input => newName = input}/>
+                            <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
                             <Text style={styles.inputText}>Number:</Text>
-                            <TextInput placeholder={"123456789"} onChangeText={input => newNumber = input}/>
+                            <TextInput placeholder={"123456789"} onChangeText={input => this.setState({newNumber: input})}/>
                         </View>
                         <View style={styles.input}>
                             <Text style={styles.inputText}>Mail:</Text>
-                            <TextInput placeholder={"ola@gmail.com"} onChangeText={input => newMail = input}/>
+                            <TextInput placeholder={"ola@gmail.com"} onChangeText={input => this.setState({newMail: input})}/>
                         </View>
                     </View>
 
@@ -83,7 +88,7 @@ class ContactHome extends Component {
                         }}>
                         </Button>
                         <Button title={"✔Save"} onPress={() => {
-                            this.newContact(newName, newNumber, newMail);
+                            this.newContact();
                             this.setModalVisible(!this.state.modalVisible);
                         }}>
                         </Button>
@@ -91,24 +96,29 @@ class ContactHome extends Component {
                 </View>
                 </Modal>
             {/*End modal*/}
-
-                <FlatList
-                data={this.state.contactArray}
-                extraData={this.state.refresh}
-                renderItem={({item, key}) => (
-                    <View style={styles.textBox}>
-                    <Text key={key} style={styles.textStyle} onPress={ this.viewDetails.bind(this, item) }> { item[0] } </Text>
+                <View style={{}}>
+                    <View style={{marginBottom: 10}}>
+                        <FlatList
+                        data={this.state.contactArray}
+                        renderItem={({item}) => (
+                            <View style={styles.textBox}>
+                            <Text style={styles.textStyle} onPress={ this.viewDetails.bind(this, item) }> { item[0] } </Text>
+                            </View>
+                        )}
+                        keyExtractor={(item) => item}
+                        refreshing={this.state.refresh}/>
                     </View>
-                )}
-                />
 
-                <View style={styles.addBtn}>
-                    <Button title={"Add contact"}
-                        onPress={() => {
-                            this.setModalVisible(true);
-                        }}>
-                    </Button>
+
+                    <View style={styles.addBtn}>
+                        <Button title={"Add contact"}
+                            onPress={() => {
+                                this.setModalVisible(true);
+                            }}>
+                        </Button>
+                    </View>
                 </View>
+
             </View>
         </View>
         );
@@ -117,8 +127,8 @@ class ContactHome extends Component {
 }
 
 let Tasks = {
-    saveContacts(contactArray) {
-        AsyncStorage.setItem("CONTACTS", this.state.contactArray);
+    saveContacts() {
+        //AsyncStorage.setItem("CONTACTS", this.state.contactArray);
     },
 
     loadContacts() {
