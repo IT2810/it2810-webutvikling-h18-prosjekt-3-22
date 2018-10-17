@@ -104,7 +104,10 @@ class Goal extends Component {
             let stepGoal = '';
             try {
                 stepGoal = await AsyncStorage.getItem('stepGoal') || 'none';
-                this.state.stepGoal = stepGoal;
+                this.setState({
+                  stepGoal: stepGoal
+                })
+              
             } catch (error) {
                 alert(error.message);
             }
