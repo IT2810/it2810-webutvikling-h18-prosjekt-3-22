@@ -4,7 +4,6 @@ import {
   Container,
   Content,
   Button,
-  Icon,
   Text
 } from "native-base";
 
