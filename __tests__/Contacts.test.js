@@ -12,11 +12,9 @@ let findElement = function (tree, element) {
   return result;
 }
 
+/* Finds inputfields for name and number-input */
 let findInputFields = function (tree, element) {
   let result = undefined;
-  /* let nameInput = tree.children[1].children[0].children[1].children[0].children[0].props.testID;
-    let numberInput = tree.children[1].children[0].children[1].children[1].children[0].props.testID;
-    let mailInput = tree.children[1].children[0].children[1].children[2].children[0].props.testID */
   let steps = tree.children[1].children[0].children[1];
   for (node in steps.children) {
     if (steps.children[node].children[0].props.testID == element) {
@@ -26,10 +24,9 @@ let findInputFields = function (tree, element) {
   return result;
 }
 
+/* Finds button */
 let findButton = function (tree, element) {
   let result = undefined;
-  /* let saveBtn = tree.children[1].children[0].children[2].children[1].props.testID;
-  let closeBtn = tree.children[1].children[0].children[2].children[0].props.testID; */
   let steps = tree.children[1].children[0].children[2];
   for (node in steps.children) {
     if (steps.children[node].props.testID == element) {
@@ -39,21 +36,21 @@ let findButton = function (tree, element) {
   return result;
 }
 
-
 describe('Contact-page test', () => {
   const tree = renderer.create( <
     Contacts / >
   ).toJSON();
+  /*Snapshot-test*/
   test('Take snapshot of contacts-component', async () => {
     await expect(tree).toMatchSnapshot();
   });
+  /*Tests to verify that the buttons and input-fields on the page are visible*/
   test('Verify that "Add Contact" Button is visible', () => {
     expect(findElement(tree, 'addContactBtn')).toBe(true);
   });
   test('Verify that all the input-fields are visible', () => {
     expect(findInputFields(tree, 'nameInput')).toBe(true);
     expect(findInputFields(tree, 'numberInput')).toBe(true);
-    expect(findInputFields(tree, 'mailInput')).toBe(true);
   });
   test('Verify that the "Close" and "Save" buttons are visible', () => {
     expect(findButton(tree, 'closeBtn')).toBe(true);
