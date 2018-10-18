@@ -61,5 +61,5 @@ expo start
 For å få opp prosjektet på mobilen kan du blant annet laste ned appen expo og enten scanne QR koden eller trykke på prosjektet som kommer opp under "Recently in development"
 
 ## Samarbeid, bruk av git, koding og leveranse
-
+Gjennom hele prosjektet har gruppa brukt git og github for å dele kode og holde oversikt over issues. Ved hjelp av github sitt trelloboard har vi hatt et oversiktlig og fint sted for å legge til oppgaver som skulle gjøres, se hvem som jobber med hva og hva som er fullført. I begynnelsen av prosjektet laget vi en del issues ut i fra hvilke funksjonalitet vi ville ha med i appen vår. Dette ble utgangspunktet for prosjektet. Når noen begynte å jobbe med en issue satte man seg opp på denne, slik at hele gruppa kunne se det, og ikke jobbe med det samme. Issues ble også flyttet fra todo til in progress når de ble påbegynt, og til done når de var merget inn. Hver issue har fått en egen branch med navn "feat-'issuenummer'-'tittel'", og hver commit til en branch med melding "#issuenummer beskrivelse". Når en issue var ferdig laget vi en pull request på github hvor de andre kunne se over at alt fungerte som det skulle før det ble merget inn i development-branchen.
 
