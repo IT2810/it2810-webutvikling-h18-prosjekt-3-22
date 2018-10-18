@@ -11,6 +11,25 @@ På contact sida har man mulighet til å legge til og slette kontakter. Kontakte
 Vi har brukt expo-cli og expo init for komme igang. I både todo, contacts og goals har vi brukt asyncstorage slik at data lagres på enheten mellom hver gang appen kjører. Av tredjepartskomponenter og bibilotek har vi brukt nativebase og react-navigation. Vi hadde egentlig også tenkt til å bruke react-native-elements og react-native-vector-icons for ikoner, men dette funket av en eller annen grunn ikke. Vi var på sal for å prøve å få hjelp, men ingen av de som satt der klarte å hjelpe oss og ga oss dermed tips om å bare bruke emojis istedenfor. Noe som er litt uheldig siden litt av oppgaven også var å benytte seg av tredjepartskomponenter, men siden dette var noe selv studassene ikke klarte å fikse føler jeg det burde være greit. 
 
 ## Testing
+Testene ble utviklet med bruk av Jest. Da vi først fikk prosjektet, skulle vi lage testene med både Jest og Enzyme, men bruk av Enzyme sammen med Jest viste seg å være en utfordring. Vi hadde ikke mulighet til å kjøre noen tester med ‘run test’ kommandoen, og gikk derfor til studass for veiledning rundt problemet. Studass hadde ikke skrevet tester tidligere, men informerte om at Enzyme ikke skulle brukes til dette prosjektet allikevel. Det førte til at vi ikke fikk testet så veldig mye mer enn snapshots, men vi har også lagt inn tester på om elementene inne på hver page er tilgjengelig, ved hjelp av en ‘testID’ på hvert element. Før vi fikk vite at Enzyme ikke skulle brukes, hadde vi plan om å skrive tester som faktisk sjekket funksjonaliteten til hvert element, f.eks at dersom man trykket på To Do-knappen, kunne vi forvente at den gikk inn på To Do-siden. Dessverre ble det ikke slik, og vi ble fortalt av studass at det kun var nødvendig med snapshot-testing.
+Da vi endret designet med native-base, fungerte plutselig ikke testene lengre. Etter mye googling fant vi ut at Jest og Native-Base ikke er kjempegode venner foreløpig, men at det finnes en snarvei. Snarveien var å legge følgende i package.json-filen.
+
+```
+"transformIgnorePatterns": [
+"node_modules/(?!react-native|expo|react-navigation|native-base|@shoutem/theme|@shoutem/animation|@shoutem/ui|tcomb-form-native)"]
+```
+
+For å kjøre testene må følgende skrives inn i terminalen:
+
+```
+npm install --save-dev jest jest-expo babel-jest jest-react-native babel-preset-env babel-preset-react-native react-test-renderer 
+```
+
+Etter at alle dependencies er lastet ned skrives følgende i terminalen for å faktisk kjøre testene:
+
+```
+npm test
+```
 
 ## Tutorial
 Disse instruksjonene vil gjøre at du får en kopi av prosjektet oppe og går på din lokale maskin for utvikling og testingsformål. 
