@@ -17,14 +17,17 @@ class Home extends Component {
       <Container style={styles.container}>
             <Content styles={styles.content}>
                 <Button light style={styles.mb15}
+                testID={'toDoBtn'}
                 onPress={() => this.props.navigation.navigate('Todo')}>
                 <Text uppercase={false} style={styles.text}>✔️     Todo</Text>
                 </Button>
                 <Button light style={[styles.mb15, styles.box]}
+                testID={'goalBtn'}
                 onPress={() => this.props.navigation.navigate('Goal')}>
                 <Text uppercase={false} style={styles.text}>🏆     Goal</Text>
                 </Button>
                 <Button light style={styles.mb15}
+                testID= {'contactsBtn'}
                 onPress={() => this.props.navigation.navigate('Goal')}>
                 <Text uppercase={false} style={styles.text}>☎️     Contacts</Text>
                 </Button>

@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Goal-page test Take snapshot of goal-component 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#4d79ff",
+        "borderBottomColor": "#ddd",
+        "borderBottomWidth": 10,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 18,
+          "padding": 26,
+        }
+      }
+    >
+       Goal 
+    </Text>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "marginTop": 20,
+        }
+      }
+    >
+      Steps taken today
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "skyblue",
+          "borderRadius": 75,
+          "height": 150,
+          "justifyContent": "center",
+          "marginTop": 10,
+          "width": 150,
+        },
+        false,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      0
+      /
+      10000
+    </Text>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "marginTop": 20,
+        }
+      }
+    >
+      Walk 
+      10000
+       steps to reach your goal.
+    </Text>
+  </View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "marginTop": 60,
+      }
+    }
+  >
+    Set a new daily goal
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    clearButtonMode="always"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="10 000 steps"
+    style={
+      Object {
+        "borderColor": "gray",
+        "borderWidth": 1,
+        "height": 50,
+        "marginTop": 10,
+        "padding": 15,
+        "textAlign": "center",
+        "width": "80%",
+      }
+    }
+    testID="goalInput"
+  />
+</View>
+`;

@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Button} from "native-base";
 import {
@@ -81,42 +80,41 @@ export default class Todo extends Component {
 
 render() {
    return (
-     <View
-       style={[styles.container, { paddingBottom: this.state.viewPadding }]}
-     >
-     <View style={styles.header}>
+    <View style={[styles.container, { paddingBottom: this.state.viewPadding }]}>
+      <View style={styles.header}>
         <Text style={styles.headerText}> Todo </Text>
       </View>
-       <FlatList
-         style={styles.list}
-         data={this.state.noteArray}
-         renderItem={({ item, index }) =>(
-           <View >
-
-             <View style={styles.listItemCont}>
-               <Text style={styles.listItem}>
-                 {item.noteText}
-               </Text>
-               <Button light style={styles.mb15}
-               onPress={() => this.deleteNote(index)}>
-               <Text uppercase={false} style={styles.text}>🗑️</Text>
-               </Button>
-             </View>
-           </View>
+      <FlatList
+        style={styles.list}
+        data={this.state.noteArray}
+        renderItem={({ item, index }) =>( 
+            <View style={styles.listItemCont}>
+              <Text style={styles.listItem}>
+                  {item.noteText}
+              </Text>
+              <Button
+                  title=''
+                  icon={{name: 'trash-o', type: 'font-awesome', size: 28}}
+                  onPress={() => this.deleteNote(index)}
+                  buttonStyle={{
+                        backgroundColor: "#ff9999",
+                      }}
+                />
+            </View>
         ) }
         keyExtractor={(item) => item.toString()}
-       />
-       <TextInput
-         style={styles.textInput}
-         onChangeText={this.changeTextHandler}
-         onSubmitEditing={this.addNote}
-         value={this.state.noteText}
-         placeholder="Add Tasks"
-         returnKeyType="done"
-         returnKeyLabel="done"
-       />
-
-     </View>
+      />
+      <TextInput
+        style={styles.textInput}
+        onChangeText={this.changeTextHandler}
+        onSubmitEditing={this.addNote}
+        value={this.state.noteText}
+        placeholder="Add Tasks"
+        returnKeyType="done"
+        returnKeyLabel="done"
+        testID={'addTaskInput'}
+      />
+    </View>
    );
  }
 }
@@ -162,15 +160,6 @@ listItemCont: {
   margin: 10
 },
 
-textInput: {
-  height: 40,
-  paddingRight: 10,
-  paddingLeft: 10,
-  borderColor: "gray",
-  borderWidth: isAndroid ? 0 : 1,
-  width: "100%"
-},
-
   header: {
     backgroundColor: '#4d79ff',
     alignItems: 'center',
@@ -205,6 +194,12 @@ textInput: {
     backgroundColor: "#252525",
     borderTopWidth: 2,
     borderTopColor: "#ededed",
+    height: 40,
+    paddingRight: 10,
+    paddingLeft: 10,
+    borderColor: "gray",
+    borderWidth: isAndroid ? 0 : 1,
+    width: "100%"
   },
 
   addButton: {
@@ -244,4 +239,4 @@ textInput: {
 });
 
 
-AppRegistry.registerComponent("Todo", () => Todo);
+AppRegistry.registerComponent("prosjekt3", () => Todo);
