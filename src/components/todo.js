@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Button} from "native-base";
 import {
@@ -114,6 +113,7 @@ render() {
                placeholder="Add Tasks"
                returnKeyType="done"
                returnKeyLabel="done"
+               testID={'addTaskInput'}
            />
      </View>
     );
@@ -161,15 +161,6 @@ listItemCont: {
   margin: 10
 },
 
-textInput: {
-  height: 40,
-  paddingRight: 10,
-  paddingLeft: 10,
-  borderColor: "gray",
-  borderWidth: isAndroid ? 0 : 1,
-  width: "100%"
-},
-
   header: {
     backgroundColor: '#4d79ff',
     alignItems: 'center',
@@ -204,6 +195,12 @@ textInput: {
     backgroundColor: "#252525",
     borderTopWidth: 2,
     borderTopColor: "#ededed",
+    height: 40,
+    paddingRight: 10,
+    paddingLeft: 10,
+    borderColor: "gray",
+    borderWidth: isAndroid ? 0 : 1,
+    width: "100%"
   },
 
   addButton: {
@@ -243,4 +240,4 @@ textInput: {
 });
 
 
-AppRegistry.registerComponent("Todo", () => Todo);
+AppRegistry.registerComponent("prosjekt3", () => Todo);
