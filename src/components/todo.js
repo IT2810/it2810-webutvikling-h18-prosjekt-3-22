@@ -15,7 +15,6 @@ import {
   TouchableOpacity
 } from "react-native";
 
-import Note from './note.js'
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
 
