@@ -20,7 +20,10 @@ export default class ContactHome extends Component {
     };
 
     componentDidMount(){
+      console.log("HIjjjII")
+
         Tasks.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
+
     }
 
     newContact = () => {
@@ -110,7 +113,9 @@ export default class ContactHome extends Component {
     };
 
     render () {
+
         return (
+
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.headerText}> Contacts </Text>
@@ -136,7 +141,7 @@ export default class ContactHome extends Component {
                     refreshing={this.state.refresh}/>
                 </ScrollView>
 
-                <Button title={"Add contact"} onPress={() => {
+                <Button title={"Add hkjhkjcontact"} onPress={() => {
                     this.setModalVisible(true);}}>
                 </Button>
             </View>
@@ -147,11 +152,11 @@ export default class ContactHome extends Component {
 let Tasks = {
     convertToArrayOfObject(contactArray, callback) {
         return callback(
-            contactArray ? contactArray.split("||").map((contact, i) => ({key: i, newName: contact, newNumber: 0})) : []
+            contactArray ? contactArray.split("||").map((contact, i) => ({key: i, newName: contact.split(" ")[0], newNumber: contact.split(" ")[1]})) : []
         );
     },
     convertToStringWithSeparators(contactArray) {
-        return contactArray.map(contact => contact.newName).join("||");
+        return contactArray.map(contact => contact.newName + " " + contact.newNumber).join("||");
     },
     loadContacts(callback) {
         return AsyncStorage.getItem("CONTACTS", (err, contactArray) =>
@@ -160,8 +165,36 @@ let Tasks = {
     },
     saveContacts(contactArray) {
         AsyncStorage.setItem("CONTACTS", this.convertToStringWithSeparators(contactArray));
+
     }
 };
+
+/**let Tasks = {
+  saveContacts(contactArray){
+    let h = "hhh jfdfjd"
+    AsyncStorage.setItem("CONTACTS", h);
+  /**  console.log("hei")
+    AsyncStorage.multiSet([
+    ["name", "gfgf"],
+    ["tlf", "gfgfjkjjk"]
+},
+  loadContacts(callback){
+    try{
+      let h = AsynchStorage.getItem("CONTACTS");
+      alert(h);
+    }
+    catch(error){
+      alert(error)
+    }
+  /**  AsyncStorage.multiGet(['name', 'tlf']).then((data) => {
+    let name = data[0][1];
+    let tlf = data[1][1];
+    return data
+});
+});
+
+  }
+}**/
 
 const styles = StyleSheet.create({
     container: {
