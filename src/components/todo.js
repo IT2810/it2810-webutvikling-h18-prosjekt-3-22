@@ -1,7 +1,6 @@
 
 import React, { Component } from "react";
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button} from "native-base";
 import {
   AppRegistry,
   StyleSheet,
@@ -40,12 +39,6 @@ export default class Todo extends Component {
       //Checks to see if something is written in the todo textfield.
       //If nothing is written, nothing will happen when you click the add button
       if(notEmpty){
-          var d = new Date();
-          /**this.state.noteArray.push({
-            'date': d.getFullYear() + "/" + (d.getMonth() + 1) +
-            "/" + d.getDate(),
-            "note" : this.state.noteText
-          })**/
           this.setState(
             prevState => {
               let {noteArray, noteText} = prevState;
@@ -56,9 +49,6 @@ export default class Todo extends Component {
             },
                 () => Tasks.save(this.state.noteArray)
           );
-
-          //this.setState({noteArray: this.state.noteArray})
-          //this.setState({noteText: ''});
       }
     }
 
@@ -107,16 +97,10 @@ render() {
                <Text style={styles.listItem}>
                  {item.noteText}
                </Text>
-               <Button
-                   title=''
-                   icon={{name: 'trash-o', type: 'font-awesome', size: 28}}
-                   onPress={() => this.deleteNote(index)}
-                   buttonStyle={{
-                         backgroundColor: "#ff9999",
-                       }}
-                />
-
-
+               <Button light style={styles.mb15}
+               onPress={() => this.deleteNote(index)}>
+               <Text uppercase={false} style={styles.text}>🗑️</Text>
+               </Button>
              </View>
            </View>
         ) }
@@ -247,6 +231,10 @@ listItemCont: {
     top: 10,
     bottom: 10,
     right: 10,
+  },
+
+  text: {
+    fontSize: 20,
   },
 
 
