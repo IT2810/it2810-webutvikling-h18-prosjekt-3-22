@@ -58,7 +58,7 @@ Hvis alt går som forventet og du ikke får noen error kan du kjøre programmet
 expo start
 
 ```
-
+For å få opp prosjektet på mobilen kan du blant annet laste ned appen expo og enten scanne QR koden eller trykke på prosjektet som kommer opp under "Recently in development"
 
 ## Samarbeid, bruk av git, koding og leveranse
 
