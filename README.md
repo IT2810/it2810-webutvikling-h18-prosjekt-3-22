@@ -28,22 +28,23 @@ Du kan installere Expo CLI ved å kjøre:
 npm install -g expo-cli
 ```
 
-### Installering
-En step by step prosess som forteller deg hvordan du installerer alle dependencies
-
 #### Step 1: Klon prosjektet fra github og naviger til mappen du klonet prosjektet i
 
 ```
 git clone https://github.com/IT2810/it2810-webutvikling-h18-prosjekt-3-22.git
 ```
 
-#### Step 2: Installer react-navigation
+
+### Installering
+En step by step prosess som forteller deg hvordan du installerer alle dependencies
+
+#### Step 1: Installer react-navigation
 
 ```
 npm install react-navigation --save
 ```
 
-#### Step 3: Installer native-base
+#### Step 2: Installer native-base
 
 ```
 npm install native-base --save
