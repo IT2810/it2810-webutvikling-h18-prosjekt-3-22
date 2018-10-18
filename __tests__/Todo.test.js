@@ -20,7 +20,7 @@ describe('ToDo-page test', () => {
   test('Take snapshot of todo-component', () => {
     expect(tree).toMatchSnapshot();
   });
-  test('Verify that Add task-button is available', async () => {
+  test('Verify that Add Task-button is available', async () => {
     await expect(findElement(tree, 'addTaskInput')).toBe(true);
   });
 
