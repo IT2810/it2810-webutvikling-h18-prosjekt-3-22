@@ -143,8 +143,7 @@ export default class ContactHome extends Component {
                     keyExtractor={(item) => item}
                     refreshing={this.state.refresh}/>
                 </ScrollView>
-
-                <Button title={"Add contact"} testID={'addContactBtn'} onPress={() => {
+                <Button title={"Add contact"} testID={'addContactBtn'}  onPress={() => {
                     this.setModalVisible(true);}}>
                 </Button>
             </View>
