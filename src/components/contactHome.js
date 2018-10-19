@@ -87,11 +87,11 @@ export default class ContactHome extends Component {
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'nameInput'}>Name:</Text>
-                            <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
+                            <TextInput style={styles.inputField} placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'numberInput'}>Number:</Text>
-                            <TextInput placeholder={"123456789"}
+                            <TextInput style={styles.inputField} placeholder={"123456789"}
                              onChangeText={input =>   this.checkNumber(input)} />
                         </View>
                     </View>
@@ -239,10 +239,10 @@ const styles = StyleSheet.create({
 
     inputText: {
         marginRight: 5,
-        width: '100%'
+        //width: '100%'
     },
     inputField: {
-//        width: '100%',
+        width: '100%',
     },
 
     textBox: {
