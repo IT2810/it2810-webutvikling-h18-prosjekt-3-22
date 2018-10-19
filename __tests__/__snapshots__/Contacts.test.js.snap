@@ -102,6 +102,7 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
             style={
               Object {
                 "marginRight": 5,
+                "width": "100%",
               }
             }
             testID="nameInput"
@@ -112,11 +113,6 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Ola Nordmann"
-            style={
-              Object {
-                "width": 200,
-              }
-            }
           />
         </View>
         <View
@@ -136,6 +132,7 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
             style={
               Object {
                 "marginRight": 5,
+                "width": "100%",
               }
             }
             testID="numberInput"
@@ -146,11 +143,6 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="123456789"
-            style={
-              Object {
-                "width": 200,
-              }
-            }
           />
         </View>
       </View>
