@@ -130,7 +130,7 @@ export default class ContactHome extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}> Conjtacts </Text>
+                    <Text style={styles.headerText}> Contacts </Text>
                 </View>
 
                 {this.drawModal()}
@@ -239,6 +239,7 @@ const styles = StyleSheet.create({
 
     inputText: {
         marginRight: 5,
+        width: '100%'
     },
     inputField: {
         width: 200,
