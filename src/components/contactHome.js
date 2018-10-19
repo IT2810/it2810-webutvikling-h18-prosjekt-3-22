@@ -111,7 +111,7 @@ export default class ContactHome extends Component {
 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}> Conjtacts </Text>
+                    <Text style={styles.headerText}> Contacts </Text>
                 </View>
 
                 {this.drawModal()}
@@ -244,11 +244,13 @@ const styles = StyleSheet.create({
         marginTop: 4,
         marginLeft: 10,
         width: '100%',
-        fontWeight: '600'
+        fontWeight: '600',
+        fontSize: 18
     },
 
     numberText: {
         marginLeft: 10,
+        fontSize: 18
     }
 });
 
