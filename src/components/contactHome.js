@@ -141,7 +141,7 @@ export default class ContactHome extends Component {
                     refreshing={this.state.refresh}/>
                 </ScrollView>
 
-                <Button title={"Add hkjhkjcontact"} onPress={() => {
+                <Button title={"Add contact"} onPress={() => {
                     this.setModalVisible(true);}}>
                 </Button>
             </View>
