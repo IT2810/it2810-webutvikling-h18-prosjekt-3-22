@@ -40,7 +40,6 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
   <Modal
     animationType="slide"
     hardwareAccelerated={false}
-    onRequestClose={[Function]}
     transparent={false}
     visible={false}
   >
@@ -113,6 +112,11 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Ola Nordmann"
+            style={
+              Object {
+                "width": 200,
+              }
+            }
           />
         </View>
         <View
@@ -142,35 +146,11 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="123456789"
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "borderWidth": 1,
-              "flexDirection": "row",
-              "marginBottom": 10,
-              "padding": 15,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
-                "marginRight": 5,
+                "width": 200,
               }
             }
-            testID="mailInput"
-          >
-            Mail:
-          </Text>
-          <TextInput
-            allowFontScaling={true}
-            onChangeText={[Function]}
-            placeholder="ola@gmail.com"
           />
         </View>
       </View>
@@ -183,150 +163,176 @@ exports[`Contact-page test Take snapshot of contacts-component 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityTraits={
-            Array [
-              "button",
-            ]
-          }
-          accessible={true}
-          isTVSelectable={true}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "opacity": 1,
+              "marginLeft": 10,
             }
           }
-          testID="closeBtn"
         >
           <View
-            style={
+            accessibilityComponentType="button"
+            accessibilityTraits={
               Array [
-                Object {},
+                "button",
               ]
             }
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID="closeBtn"
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
+            <View
               style={
                 Array [
-                  Object {
-                    "color": "#007AFF",
-                    "fontSize": 18,
-                    "padding": 8,
-                    "textAlign": "center",
-                  },
+                  Object {},
                 ]
               }
             >
-              ✖Close
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#007AFF",
+                      "fontSize": 18,
+                      "padding": 8,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                ✖Close
+              </Text>
+            </View>
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
-          accessibilityTraits={
-            Array [
-              "button",
-            ]
-          }
-          accessible={true}
-          isTVSelectable={true}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "opacity": 1,
+              "marginLeft": 10,
             }
           }
-          testID="saveBtn"
         >
           <View
-            style={
+            accessibilityComponentType="button"
+            accessibilityTraits={
               Array [
-                Object {},
+                "button",
               ]
             }
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID="saveBtn"
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
+            <View
               style={
                 Array [
-                  Object {
-                    "color": "#007AFF",
-                    "fontSize": 18,
-                    "padding": 8,
-                    "textAlign": "center",
-                  },
+                  Object {},
                 ]
               }
             >
-              ✔Save
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#007AFF",
+                      "fontSize": 18,
+                      "padding": 8,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                ✔Save
+              </Text>
+            </View>
           </View>
         </View>
       </View>
     </View>
   </Modal>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "opacity": 1,
+        "alignItems": "center",
+        "justifyContent": "center",
+        "width": "100%",
       }
     }
-    testID="addContactBtn"
   >
     <View
-      style={
+      accessibilityComponentType="button"
+      accessibilityTraits={
         Array [
-          Object {},
+          "button",
         ]
       }
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="addContactBtn"
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+      <View
         style={
           Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "padding": 8,
-              "textAlign": "center",
-            },
+            Object {},
           ]
         }
       >
-        Add contact
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Add contact
+        </Text>
+      </View>
     </View>
   </View>
 </View>

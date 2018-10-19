@@ -54,7 +54,7 @@ exports[`ToDo-page test Take snapshot of todo-component 1`] = `
         "borderTopColor": "#ededed",
         "borderTopWidth": 2,
         "borderWidth": 1,
-        "color": "#fff",
+        "color": "white",
         "height": 40,
         "padding": 20,
         "paddingLeft": 10,
