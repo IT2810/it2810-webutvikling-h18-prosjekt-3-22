@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     inputField: {
-        width: 200,
+        width: '100%',
     },
 
     textBox: {
