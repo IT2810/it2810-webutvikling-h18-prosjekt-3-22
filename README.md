@@ -71,6 +71,9 @@ React-navigation er et bibilotek for routing, som gjør det enkelt navigere mell
 ```
 npm install react-navigation --save
 ```
+I App.js:
+
+![Screenshot](navigation.png)
 
 #### Step 2: Installer native-base
 
