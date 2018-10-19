@@ -20,10 +20,7 @@ export default class ContactHome extends Component {
     };
 
     componentDidMount(){
-      console.log("HIjjjII")
-
         Contacts.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
-
     }
 
     newContact = () => {
@@ -220,7 +217,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 10,
         marginLeft: 10,
-        marginBottom:10,
+        marginBottom:25,
         flexDirection: 'row',
         height: 50
     },
@@ -228,7 +225,6 @@ const styles = StyleSheet.create({
     boxName: {
         width: '80%',
         height: '100%'
-
     },
 
     boxDelete: {
@@ -251,6 +247,7 @@ const styles = StyleSheet.create({
     numberText: {
         marginLeft: 10,
         fontSize: 18
+
     }
 });
 
