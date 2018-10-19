@@ -58,6 +58,22 @@ export default class ContactHome extends Component {
         );
     };
 
+    checkNumber(text){
+        let newText = '';
+        let numbers = '0123456789';
+
+        for (var i=0; i < text.length; i++) {
+            if(numbers.indexOf(text[i]) > -1 ) {
+                newText = newText + text[i];
+            }
+            else {
+                // your call back function
+                Alert.alert("Please enter numbers only for number");
+            }
+        }
+        this.setState({ newNumber: newText });
+    }
+
     drawModal = () => {
         return (
             <Modal
@@ -74,7 +90,8 @@ export default class ContactHome extends Component {
                         </View>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'numberInput'}>Number:</Text>
-                            <TextInput placeholder={"123456789"} onChangeText={input => this.setState({newNumber: input})}/>
+                            <TextInput placeholder={"123456789"}
+                             onChangeText={input =>   this.checkNumber(input)} />
                         </View>
                     </View>
 
@@ -112,7 +129,7 @@ export default class ContactHome extends Component {
 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}> Contacts </Text>
+                    <Text style={styles.headerText}> Conhhtacts </Text>
                 </View>
 
                 {this.drawModal()}
