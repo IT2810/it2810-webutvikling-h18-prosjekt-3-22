@@ -64,8 +64,7 @@ export default class ContactHome extends Component {
     drawModal = () => {
         return (
             <Modal
-                animationType="slide" transparent={false} visible={this.state.modalVisible}
-            >
+                animationType="slide" transparent={false} visible={this.state.modalVisible}>
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <Text style={styles.headerText}> Add new contact </Text>
@@ -112,7 +111,7 @@ export default class ContactHome extends Component {
 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}> Contacts </Text>
+                    <Text style={styles.headerText}> Conjtacts </Text>
                 </View>
 
                 {this.drawModal()}
@@ -124,7 +123,7 @@ export default class ContactHome extends Component {
                         <View key={index} style={styles.textBox}>
                             <View style={styles.boxName}>
                                 <Text style={styles.textStyle}> { item.newName } </Text>
-                                <Text style={styles.numberText}> { item.newNumber } </Text>
+                                <Text style={styles.numberText}>📞 { item.newNumber } </Text>
                             </View>
                             <View style={styles.boxDelete}>
                                 <Text style={{fontSize: 20}} onPress={() => this.deleteContact(index)}>✖</Text>
@@ -134,7 +133,7 @@ export default class ContactHome extends Component {
                     keyExtractor={(item) => item}
                     refreshing={this.state.refresh}/>
                 </ScrollView>
-                <Button title={"Add contact"} testID={'addContactBtn'}  onPress={() => {
+                <Button style={styles.button} title={"Add contact"} testID={'addContactBtn'}  onPress={() => {
                     this.setModalVisible(true);}}>
                 </Button>
             </View>
@@ -190,6 +189,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    button: {
+      width: '50%'
+    },
+
     content: {
         marginTop: 80
     },
@@ -224,8 +227,7 @@ const styles = StyleSheet.create({
 
     boxName: {
         width: '80%',
-        height: '100%',
-        backgroundColor: "skyblue",
+        height: '100%'
 
     },
 
