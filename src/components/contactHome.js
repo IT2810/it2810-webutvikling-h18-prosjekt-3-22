@@ -241,9 +241,9 @@ const styles = StyleSheet.create({
         marginRight: 5,
         width: '100%'
     },
-    inputField: {
-//        width: '100%',
-    },
+/*     inputField: {
+        width: 200,
+    }, */
 
     textBox: {
         justifyContent: 'center',
