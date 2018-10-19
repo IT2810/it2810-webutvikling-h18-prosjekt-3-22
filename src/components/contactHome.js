@@ -64,9 +64,8 @@ export default class ContactHome extends Component {
     drawModal = () => {
         return (
             <Modal
-                animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
-            }}>
+                animationType="slide" transparent={false} visible={this.state.modalVisible}
+            >
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <Text style={styles.headerText}> Add new contact </Text>
@@ -74,16 +73,12 @@ export default class ContactHome extends Component {
 
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
-                            <Text style={styles.inputText} testID={'nameInput'}>Najme:</Text>
+                            <Text style={styles.inputText} testID={'nameInput'}>Name:</Text>
                             <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'numberInput'}>Number:</Text>
                             <TextInput placeholder={"123456789"} onChangeText={input => this.setState({newNumber: input})}/>
-                        </View>
-                        <View style={styles.input}>
-                            <Text style={styles.inputText} testID={'mailInput'}>Mail:</Text>
-                            <TextInput placeholder={"ola@gmail.com"} onChangeText={input => this.setState({newMail: input})}/>
                         </View>
                     </View>
 
