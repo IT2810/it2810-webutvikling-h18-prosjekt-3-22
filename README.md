@@ -63,11 +63,13 @@ npm install react-navigation --save
 
 #### Step 2: Installer native-base
 
-Native-base er et bibilotek for å lage UI komponenter. Vi har bare brukt dette bibiloteket på forsiden. Hadde vi oppdaget det litt før hadde vi også brukt det på de andre sidene også
-```
-npm install native-base --save
+Native-base er et bibilotek som gjør det enkelt å lage UI komponenter.
 
 ```
+npm install native-base --save
+```
+
+Vi hadde som sagt også tenkt til å ta i bruk react-native-vector-icons, men dette funket ikke selv etter hjelp fra studass. Derfor har vi ikke fått brukt like mange tredjepartsbibilotek som egentlig var planen
 
 ### Kjør programmet
 
