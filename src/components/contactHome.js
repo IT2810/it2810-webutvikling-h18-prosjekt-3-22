@@ -87,11 +87,11 @@ export default class ContactHome extends Component {
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'nameInput'}>Name:</Text>
-                            <TextInput style={styles.inputField} placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
+                            <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'numberInput'}>Number:</Text>
-                            <TextInput style={styles.inputField} placeholder={"123456789"}
+                            <TextInput placeholder={"123456789"}
                              onChangeText={input =>   this.checkNumber(input)} />
                         </View>
                     </View>
