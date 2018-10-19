@@ -79,23 +79,27 @@ export default class ContactHome extends Component {
                     </View>
 
                     <View style={styles.btnWrapper}>
-                        <Button title={"✖Close"} testID={'closeBtn'} onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
-                            this.state.newName = "";
-                            this.state.newNumber = "";
-                        }}>
-                        </Button>
-                        <Button title={"✔Save"} testID={'saveBtn'} onPress={() => {
-                            let notEmptyName = this.state.newName.trim().length > 0;
-                            let notEmptyNr = this.state.newNumber.trim().length > 0;
-                            if(notEmptyName && notEmptyNr){
-                                this.newContact();
-                                this.setModalVisible(!this.state.modalVisible);
-                            }else{
-                                Alert.alert("Please enter name and number");
-                            }
-                        }}>
-                        </Button>
+                      <View style={styles.btn}>
+                          <Button title={"✖Close"} testID={'closeBtn'} onPress={() => {
+                              this.setModalVisible(!this.state.modalVisible);
+                              this.state.newName = "";
+                              this.state.newNumber = "";
+                          }}>
+                          </Button>
+                      </View>
+                      <View style={styles.btn}>
+                          <Button title={"✔Save"} testID={'saveBtn'} onPress={() => {
+                              let notEmptyName = this.state.newName.trim().length > 0;
+                              let notEmptyNr = this.state.newNumber.trim().length > 0;
+                              if(notEmptyName && notEmptyNr){
+                                  this.newContact();
+                                  this.setModalVisible(!this.state.modalVisible);
+                              }else{
+                                  Alert.alert("Please enter name and number");
+                              }
+                          }}>
+                          </Button>
+                      </View>
                     </View>
                 </View>
             </Modal>
@@ -185,13 +189,17 @@ const styles = StyleSheet.create({
 
     btnWrapper: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
 
     button: {
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center'
+    },
+
+    btn: {
+      marginLeft: 10
     },
 
     content: {
