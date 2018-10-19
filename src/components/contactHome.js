@@ -130,9 +130,11 @@ export default class ContactHome extends Component {
                     keyExtractor={(item) => item}
                     refreshing={this.state.refresh}/>
                 </ScrollView>
-                <Button style={styles.button} title={"Add contact"} testID={'addContactBtn'}  onPress={() => {
-                    this.setModalVisible(true);}}>
-                </Button>
+                <View style={styles.button}>
+                    <Button title={"Add contact"} testID={'addContactBtn'}  onPress={() => {
+                        this.setModalVisible(true);}}>
+                    </Button>
+                </View>
             </View>
         );
     }
@@ -187,7 +189,9 @@ const styles = StyleSheet.create({
     },
 
     button: {
-      width: '50%'
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
 
     content: {
