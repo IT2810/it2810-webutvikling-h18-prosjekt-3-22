@@ -102,6 +102,8 @@ Etter at alle dependencies er lastet ned skrives følgende i terminalen for å f
 npm test
 ```
 
+![Screenshot](test.png)
+
 Ellers har vi testet koden underveis på både Android og ios, da vi har vært heldige med å ha begge typer telefoner i gruppa. Det har vist seg at det er noen designforskjeller på de to plattformene, og vi har også opplevd at noen funksjoner har vært vanskeligere å implementere på en av plattformene enn den andre. Slike problemer har heldigvis blitt løst underveis, uten for mye frustrasjon.
 
 
