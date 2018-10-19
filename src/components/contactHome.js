@@ -123,7 +123,7 @@ export default class ContactHome extends Component {
                                 <Text style={styles.numberText}>📞 { item.newNumber } </Text>
                             </View>
                             <View style={styles.boxDelete}>
-                                <Text style={{fontSize: 20}} onPress={() => this.deleteContact(index)}>✖</Text>
+                                <Text style={{fontSize: 20}} onPress={() => this.deleteContact(index)}>🗑️</Text>
                             </View>
                         </View>
                     )}
@@ -234,7 +234,6 @@ const styles = StyleSheet.create({
     boxDelete: {
         width: '20%',
         height: '100%',
-        backgroundColor: "lightgrey",
         alignItems: 'center',
         justifyContent: 'center'
     },
