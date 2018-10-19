@@ -18,7 +18,7 @@ class Home extends Component {
                 <Button light style={styles.button}
                     testID={'toDoBtn'}
                      onPress={() => this.props.navigation.navigate('Todo')}>
-                     <Text uppercase={false} style={styles.text}>✔️     Todo</Text>
+                     <Text uppercase={false} style={styles.text}>✔️     Tohhdo</Text>
                 </Button>
                 <Button light style={styles.button}
                     testID={'goalBtn'}
@@ -27,7 +27,7 @@ class Home extends Component {
                 </Button>
                 <Button light style={styles.button}
                     testID= {'contactsBtn'}
-                    onPress={() => this.props.navigation.navigate('Goal')}>
+                    onPress={() => this.props.navigation.navigate('ContactHome')}>
                     <Text uppercase={false} style={styles.text}>☎️     Contacts</Text>
             </Button>
         </Content>

@@ -22,7 +22,7 @@ export default class ContactHome extends Component {
     componentDidMount(){
       console.log("HIjjjII")
 
-        Tasks.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
+        Contacts.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
 
     }
 
@@ -40,16 +40,12 @@ export default class ContactHome extends Component {
           prevState => {
             let {contactArray, newName, newNumber} = prevState;
             return {
-              //This will display the text
-              //contactArray: oldArray.concat([contact]),
-
-              //This will store the newName in AsyncStorage, but not display text
               contactArray: oldArray.concat({key: contactArray.length, newName: newName, newNumber: newNumber}),
               newName: "",
               newNumber: ""
             };
           },
-              () => Tasks.saveContacts(this.state.contactArray)
+              () => Contacts.saveContacts(this.state.contactArray)
         );
     };
 
@@ -61,7 +57,7 @@ export default class ContactHome extends Component {
 
                 return {contactArray: contactArray};
             },
-            () => Tasks.saveContacts(this.state.contactArray)
+            () => Contacts.saveContacts(this.state.contactArray)
         );
     };
 
@@ -78,7 +74,7 @@ export default class ContactHome extends Component {
 
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
-                            <Text style={styles.inputText} testID={'nameInput'}>Name:</Text>
+                            <Text style={styles.inputText} testID={'nameInput'}>Najme:</Text>
                             <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
@@ -151,7 +147,7 @@ export default class ContactHome extends Component {
     }
 }
 
-let Tasks = {
+let Contacts = {
     convertToArrayOfObject(contactArray, callback) {
         return callback(
             contactArray ? contactArray.split("||").map((contact, i) => ({key: i, newName: contact.split(" ")[0], newNumber: contact.split(" ")[1]})) : []
@@ -171,32 +167,6 @@ let Tasks = {
     }
 };
 
-/**let Tasks = {
-  saveContacts(contactArray){
-    let h = "hhh jfdfjd"
-    AsyncStorage.setItem("CONTACTS", h);
-  /**  console.log("hei")
-    AsyncStorage.multiSet([
-    ["name", "gfgf"],
-    ["tlf", "gfgfjkjjk"]
-},
-  loadContacts(callback){
-    try{
-      let h = AsynchStorage.getItem("CONTACTS");
-      alert(h);
-    }
-    catch(error){
-      alert(error)
-    }
-  /**  AsyncStorage.multiGet(['name', 'tlf']).then((data) => {
-    let name = data[0][1];
-    let tlf = data[1][1];
-    return data
-});
-});
-
-  }
-}**/
 
 const styles = StyleSheet.create({
     container: {
