@@ -45,9 +45,25 @@ Disse instruksjonene vil gjøre at du får en kopi av prosjektet oppe og går p�
 ### Forutsetninger
 Dette er software du må installere for å kjøre prosjektet på din maskin og hvordan du installerer det
 
-#### Step: 1 Installer Expo CLI
-Expo CLI er et verktøy for å utvikle apper med expo. Du trenger også Node.js (versjon 6 eller nyere) installert på maskinen din.
+
+#### Step 1: Klon prosjektet fra github og naviger til mappen du klonet prosjektet i
+
+```
+git clone https://github.com/IT2810/it2810-webutvikling-h18-prosjekt-3-22.git
+```
+
+#### Step: 2 Installer npm
+Du trenger Node.js (versjon 6 eller nyere) installert på maskinen din.
 [Last ned den nyeste versjonen av Node.js](https://nodejs.org/en/)
+
+Du kan installere npm ved å kjøre:
+```
+npm install
+```
+
+ 
+#### Step: 3 Installer Expo CLI
+Expo CLI er et verktøy for å utvikle apper med expo.
 
 Du kan installere Expo CLI ved å kjøre:
 
@@ -55,11 +71,6 @@ Du kan installere Expo CLI ved å kjøre:
 npm install -g expo-cli
 ```
 
-#### Step 1: Klon prosjektet fra github og naviger til mappen du klonet prosjektet i
-
-```
-git clone https://github.com/IT2810/it2810-webutvikling-h18-prosjekt-3-22.git
-```
 
 
 ### Installering
