@@ -50,15 +50,9 @@ exports[`ToDo-page test Take snapshot of todo-component 1`] = `
       Object {
         "alignSelf": "stretch",
         "backgroundColor": "#252525",
-        "borderColor": "gray",
-        "borderTopColor": "#ededed",
-        "borderTopWidth": 2,
         "borderWidth": 1,
-        "color": "#fff",
-        "height": 40,
+        "color": "white",
         "padding": 20,
-        "paddingLeft": 10,
-        "paddingRight": 10,
         "width": "100%",
       }
     }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Modal, AsyncStorage, Alert, FlatList, ScrollView} from 'react-native';
+import { AppRegistry, StyleSheet, Text, TextInput, View, Button, Modal, AsyncStorage, Alert, FlatList, ScrollView} from 'react-native';
+import Todo from "./todo";
 
-class ContactHome extends Component {
+export default class ContactHome extends Component {
 
     constructor (){
         super();
@@ -11,50 +12,36 @@ class ContactHome extends Component {
             refresh: false,
             newName: "",
             newNumber: "",
-            newMail: ""
         }
     }
 
-    setModalVisible(visible) {
+    setModalVisible = visible => {
         this.setState({modalVisible: visible});
-    }
+    };
 
+    //Loads all the saved contacts
     componentDidMount(){
-        Tasks.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
+        Contacts.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
     }
 
+    //Function that adds a new contact and saves the state
     newContact = () => {
-        let contact = [
-            "",
-            "",
-            ""
-        ];
-
-        contact[0] = this.state.newName;
-        contact[1] = this.state.newNumber;
-        contact[2] = this.state.newMail;
-
         let oldArray = this.state.contactArray;
-
-        this.setState({
-            contactArray: oldArray.concat([contact]),
-            newName: "",
-            newNumber: "",
-            newMail: "",
-            refresh: true}
-        )
-
-        Tasks.saveContacts(this.state.contactArray)
+        this.setState(
+          prevState => {
+            let {contactArray, newName, newNumber} = prevState;
+            return {
+              contactArray: oldArray.concat({key: contactArray.length, newName: newName, newNumber: newNumber}),
+              newName: "",
+              newNumber: ""
+            };
+          },
+          //Save the contact with asyncStorage
+              () => Contacts.saveContacts(this.state.contactArray)
+        );
     };
 
-    viewDetails=(item)=>{
-        let name = item[0];
-        let number = item[1];
-        let mail = item[2];
-
-        Alert.alert(name, ('Number: ' + number + '\n' + 'Mail: '+ mail));
-    };
-
+    //Function that deletes a contact and saves the new state
     deleteContact = index => {
         this.setState(
             prevState => {
@@ -63,16 +50,35 @@ class ContactHome extends Component {
 
                 return {contactArray: contactArray};
             },
-            () => Tasks.saveContacts(this.state.contactArray)
+            //Save the new state with asyncStorage
+            () => Contacts.saveContacts(this.state.contactArray)
         );
     };
 
+
+    //Checks to see if the tlf number has correct format
+    checkNumber(text){
+        let newText = '';
+        let numbers = '0123456789';
+
+        //Goes through what's written in the textfield for tlf and checks that it only consists of numbers
+        for (var i=0; i < text.length; i++) {
+            if(numbers.indexOf(text[i]) > -1 ) {
+                newText = newText + text[i];
+            }
+            else {
+                Alert.alert("Please enter numbers only for number");
+            }
+        }
+        //Sets the state for the new number
+        this.setState({ newNumber: newText });
+    }
+
+    //Modal that show up when you click "Add contact"
     drawModal = () => {
         return (
             <Modal
-                animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
-            }}>
+                animationType="slide" transparent={false} visible={this.state.modalVisible}>
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <Text style={styles.headerText}> Add new contact </Text>
@@ -81,34 +87,45 @@ class ContactHome extends Component {
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'nameInput'}>Name:</Text>
-                            <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
+                            <TextInput style={styles.inputField} placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
                             <Text style={styles.inputText} testID={'numberInput'}>Number:</Text>
-                            <TextInput placeholder={"123456789"} onChangeText={input => this.setState({newNumber: input})}/>
-                        </View>
-                        <View style={styles.input}>
-                            <Text style={styles.inputText} testID={'mailInput'}>Mail:</Text>
-                            <TextInput placeholder={"ola@gmail.com"} onChangeText={input => this.setState({newMail: input})}/>
+                            <TextInput style={styles.inputField} placeholder={"123456789"}
+                             onChangeText={input =>   this.checkNumber(input)} />
                         </View>
                     </View>
 
                     <View style={styles.btnWrapper}>
-                        <Button title={"✖Close"} testID={'closeBtn'} onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
-                        }}>
-                        </Button>
-                        <Button title={"✔Save"} testID={'saveBtn'} onPress={() => {
-                            this.newContact();
-                            this.setModalVisible(!this.state.modalVisible);
-                        }}>
-                        </Button>
+                      <View style={styles.btn}>
+                          <Button title={"✖Close"} testID={'closeBtn'} onPress={() => {
+                              this.setModalVisible(!this.state.modalVisible);
+                              this.state.newName = "";
+                              this.state.newNumber = "";
+                          }}>
+                          </Button>
+                      </View>
+                      <View style={styles.btn}>
+                          <Button title={"✔Save"} testID={'saveBtn'} onPress={() => {
+                              let notEmptyName = this.state.newName.trim().length > 0;
+                              let notEmptyNr = this.state.newNumber.trim().length > 0;
+                              if(notEmptyName && notEmptyNr){
+                                  this.newContact();
+                                  this.setModalVisible(!this.state.modalVisible);
+                              }else{
+                                  Alert.alert("Please enter name and number");
+                              }
+                          }}>
+                          </Button>
+                      </View>
                     </View>
                 </View>
             </Modal>
         )
     };
 
+    //Renders the contacts with name and number
+    //If no contacts, you see nothing. Just and "Add contact" button
     render () {
         return (
             <View style={styles.container}>
@@ -124,33 +141,37 @@ class ContactHome extends Component {
                     renderItem={({item, index}) => (
                         <View key={index} style={styles.textBox}>
                             <View style={styles.boxName}>
-                                <Text style={styles.textStyle} onPress={ this.viewDetails.bind(this, item) }> { item[0] } </Text>
+                                <Text style={styles.textStyle}> { item.newName } </Text>
+                                <Text style={styles.numberText}>📞 { item.newNumber } </Text>
                             </View>
                             <View style={styles.boxDelete}>
-                                <Text style={{fontSize: 20}} onPress={() => this.deleteContact(index)}>✖</Text>
+                                <Text style={{fontSize: 20}} onPress={() => this.deleteContact(index)}>🗑️</Text>
                             </View>
                         </View>
                     )}
                     keyExtractor={(item) => item}
                     refreshing={this.state.refresh}/>
                 </ScrollView>
-
-                <Button title={"Add contact"} testID={'addContactBtn'} onPress={() => {
-                    this.setModalVisible(true);}}>
-                </Button>
+                <View style={styles.button}>
+                    <Button title={"Add contact"} testID={'addContactBtn'}  onPress={() => {
+                        this.setModalVisible(true);}}>
+                    </Button>
+                </View>
             </View>
         );
     }
 }
 
-let Tasks = {
+
+//Asyncstorage for adding and removing contacts
+let Contacts = {
     convertToArrayOfObject(contactArray, callback) {
         return callback(
-            contactArray ? contactArray.split("||").map((contact) => ({contact})) : []
+            contactArray ? contactArray.split("||").map((contact, i) => ({key: i, newName: contact.split(" ")[0], newNumber: contact.split(" ")[1]})) : []
         );
     },
     convertToStringWithSeparators(contactArray) {
-        return contactArray.map(contact => contact.noteText).join("||");
+        return contactArray.map(contact => contact.newName + " " + contact.newNumber).join("||");
     },
     loadContacts(callback) {
         return AsyncStorage.getItem("CONTACTS", (err, contactArray) =>
@@ -159,8 +180,10 @@ let Tasks = {
     },
     saveContacts(contactArray) {
         AsyncStorage.setItem("CONTACTS", this.convertToStringWithSeparators(contactArray));
+
     }
 };
+
 
 const styles = StyleSheet.create({
     container: {
@@ -186,7 +209,17 @@ const styles = StyleSheet.create({
 
     btnWrapper: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+    },
+
+    button: {
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+
+    btn: {
+      marginLeft: 10
     },
 
     content: {
@@ -205,41 +238,52 @@ const styles = StyleSheet.create({
     },
 
     inputText: {
-        marginRight: 5
+        marginRight: 5,
+        //width: '100%'
     },
+    inputField: {
+        width: '100%',
+    },
+/*     inputField: {
+        width: 200,
+    }, */
 
     textBox: {
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 10,
         marginLeft: 10,
-        marginBottom:10,
+        marginBottom: 35,
         flexDirection: 'row',
         height: 50
     },
 
     boxName: {
         width: '80%',
-        height: '100%',
-        backgroundColor: "skyblue",
-
+        height: '100%'
     },
 
     boxDelete: {
         width: '20%',
         height: '100%',
-        backgroundColor: "lightgrey",
         alignItems: 'center',
         justifyContent: 'center'
     },
 
     textStyle: {
-        marginBottom: 10,
-        marginTop: 10,
-        marginLeft: 20,
+        marginBottom: 5,
+        marginTop: 4,
+        marginLeft: 10,
         width: '100%',
-        fontWeight: '600'
+        fontWeight: '600',
+        fontSize: 18
     },
+
+    numberText: {
+        marginLeft: 10,
+        fontSize: 18
+
+    }
 });
 
-export default ContactHome;
+AppRegistry.registerComponent("ContactHome", () => ContactHome);

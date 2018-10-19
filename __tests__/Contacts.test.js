@@ -5,7 +5,7 @@ import Contacts from '../src/components/contactHome.js';
 
 let findElement = function (tree, element) {
   let result = undefined;
-  let addContactBtn = tree.children[2].props.testID;
+  let addContactBtn = tree.children[2].children[0].props.testID;
   if (addContactBtn == element) {
     result = true;
   }
@@ -29,7 +29,7 @@ let findButton = function (tree, element) {
   let result = undefined;
   let steps = tree.children[1].children[0].children[2];
   for (node in steps.children) {
-    if (steps.children[node].props.testID == element) {
+    if (steps.children[node].children[0].props.testID == element) {
       result = true;
     }
   }
