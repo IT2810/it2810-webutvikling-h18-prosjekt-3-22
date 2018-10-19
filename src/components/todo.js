@@ -82,6 +82,7 @@ export default class Todo extends Component {
   Tasks.all(todoArray => this.setState({ todoArray: todoArray || [] }));
 }
 
+//Renders the todos with a delete button to the right and textfield for adding new todo
 render() {
    return (
      <View style={[styles.container, { paddingBottom: this.state.viewPadding }]}>
@@ -120,7 +121,7 @@ render() {
   }
 }
 
-
+//Asyncstorage for saving the todos
 let Tasks = {
   convertToArrayOfObject(todoArray, callback) {
     return callback(
@@ -145,9 +146,10 @@ const styles = StyleSheet.create({
   container: {
   flex: 1,
 },
-list: {
-  width: "100%"
+  list: {
+    width: "100%"
 },
+
 listItem: {
   paddingTop: 2,
   paddingBottom: 2,
@@ -180,25 +182,11 @@ listItemCont: {
     marginBottom: 100,
   },
 
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-  },
-
   textInput: {
     alignSelf: 'stretch',
     color: 'white',
     padding: 20,
     backgroundColor: "#252525",
-    borderTopWidth: 2,
-    borderTopColor: "#ededed",
-    height: 40,
-    paddingRight: 10,
-    paddingLeft: 10,
-    borderColor: "gray",
     borderWidth: isAndroid ? 0 : 1,
     width: "100%"
   },
@@ -206,8 +194,6 @@ listItemCont: {
   text: {
     fontSize: 20,
   },
-
-
 });
 
 

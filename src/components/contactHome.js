@@ -239,6 +239,7 @@ const styles = StyleSheet.create({
 
     inputText: {
         marginRight: 5,
+        width: '100%'
     },
     inputField: {
         width: 200,
