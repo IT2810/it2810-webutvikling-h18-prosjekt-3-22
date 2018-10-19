@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 10,
         marginLeft: 10,
-        marginBottom:25,
+        marginBottom: 35,
         flexDirection: 'row',
         height: 50
     },
