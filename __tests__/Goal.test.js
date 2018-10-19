@@ -15,7 +15,6 @@ let findInput = function (tree, element) {
 }
 
 describe('Goal-page test', () => {
-  const steps = tree.children[2].children[0];
   const tree = renderer.create( <
     Goal / >
   ).toJSON();
@@ -25,12 +24,12 @@ describe('Goal-page test', () => {
   });
   /* Test to verify that the stepgoal is 10 000 before you set your own goal*/
   test('Verify that stepgoal is 10000', () => {
-    let stepGoal = steps.children[2];
+    let stepGoal = tree.children[2].children[0].children[2];
     expect(stepGoal).toEqual('10000');
   });
   /* Test to verify that the steps taken today starts with 0 */
   test('Verify that steps taken today is 0', () => {
-    const stepsToday = steps.children[0];
+    const stepsToday = tree.children[2].children[0].children[0];
     expect(stepsToday).toEqual('0');
   });
   /* Test to verify that the inputbox where you input goal is available */
