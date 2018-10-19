@@ -103,7 +103,7 @@ class Goal extends Component {
         const getStepGoal = async () => {
             let stepGoal = '';
             try {
-                stepGoal = await AsyncStorage.getItem('stepGoal') || '10000';
+                stepGoal = await AsyncStorage.getItem('stepGoal') || 'none';
                 this.setState({
                   stepGoal: stepGoal
                 })
@@ -159,6 +159,7 @@ class Goal extends Component {
             onChangeText={newInput => {this.setState({newGoal: newInput})}}
             onSubmitEditing={() => this.onSubmit(this.state.newGoal)}
             clearButtonMode={"always"}
+            testID={'goalInput'}
             >
           </TextInput>
       </View>

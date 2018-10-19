@@ -78,23 +78,27 @@ export default class ContactHome extends Component {
 
                     <View style={styles.inputWrapper}>
                         <View style={styles.input}>
-                            <Text style={styles.inputText}>Name:</Text>
-                            <TextInput style={styles.inputField} placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
+                            <Text style={styles.inputText} testID={'nameInput'}>Name:</Text>
+                            <TextInput placeholder={"Ola Nordmann"} onChangeText={input => this.setState({newName: input})}/>
                         </View>
                         <View style={styles.input}>
-                            <Text style={styles.inputText}>Number:</Text>
-                            <TextInput style={styles.inputField} placeholder={"123456789"} onChangeText={input => this.setState({newNumber: input})}/>
+                            <Text style={styles.inputText} testID={'numberInput'}>Number:</Text>
+                            <TextInput placeholder={"123456789"} onChangeText={input => this.setState({newNumber: input})}/>
+                        </View>
+                        <View style={styles.input}>
+                            <Text style={styles.inputText} testID={'mailInput'}>Mail:</Text>
+                            <TextInput placeholder={"ola@gmail.com"} onChangeText={input => this.setState({newMail: input})}/>
                         </View>
                     </View>
 
                     <View style={styles.btnWrapper}>
-                        <Button title={"✖Close"} onPress={() => {
+                        <Button title={"✖Close"} testID={'closeBtn'} onPress={() => {
                             this.setModalVisible(!this.state.modalVisible);
                             this.state.newName = "";
                             this.state.newNumber = "";
                         }}>
                         </Button>
-                        <Button title={"✔Save"} onPress={() => {
+                        <Button title={"✔Save"} testID={'saveBtn'} onPress={() => {
                             let notEmptyName = this.state.newName.trim().length > 0;
                             let notEmptyNr = this.state.newNumber.trim().length > 0;
                             if(notEmptyName && notEmptyNr){
@@ -103,7 +107,6 @@ export default class ContactHome extends Component {
                             }else{
                                 Alert.alert("Please enter name and number");
                             }
-
                         }}>
                         </Button>
                     </View>
@@ -141,7 +144,7 @@ export default class ContactHome extends Component {
                     refreshing={this.state.refresh}/>
                 </ScrollView>
 
-                <Button title={"Add hkjhkjcontact"} onPress={() => {
+                <Button title={"Add contact"} testID={'addContactBtn'} onPress={() => {
                     this.setModalVisible(true);}}>
                 </Button>
             </View>

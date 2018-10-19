@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Button} from "native-base";
 import {
@@ -7,7 +6,6 @@ import {
   AsyncStorage,
   Text,
   TextInput,
-  ScrollView,
   View,
   FlatList,
   Keyboard,
@@ -15,7 +13,6 @@ import {
   TouchableOpacity
 } from "react-native";
 
-import Note from './note.js'
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
 
@@ -23,49 +20,54 @@ export default class Todo extends Component {
   constructor(props){
     super(props);
     this.state = {
-      noteArray: [],
-      noteText: '',
+      todoArray: [],
+      todoText: '',
     }
   }
 
-  changeTextHandler = noteText => {
-    this.setState({ noteText: noteText });
+  changeTextHandler = todoText => {
+    this.setState({ todoText: todoText });
   };
 
+ //Adds a new todo
+ addTodo = () => {
 
-    addNote = () => {
-      let notEmpty = this.state.noteText.trim().length > 0;
+    //Checks to see if something is written in the todo textfield.
+    let notEmpty = this.state.todoText.trim().length > 0;
 
-      //Checks to see if something is written in the todo textfield.
-      //If nothing is written, nothing will happen when you click the add button
-      if(notEmpty){
-          this.setState(
-            prevState => {
-              let {noteArray, noteText} = prevState;
-              return {
-                noteArray: noteArray.concat({key: noteArray.length, noteText: noteText}),
-                noteText: ""
-              };
-            },
-                () => Tasks.save(this.state.noteArray)
-          );
-      }
+    //If nothing is written in the todofield, nothing will happen when you click on the add button
+    if(notEmpty){
+        this.setState(
+          prevState => {
+            let {todoArray, todoText} = prevState;
+            return {
+              todoArray: todoArray.concat({key: todoArray.length, todoText: todoText}),
+              todoText: ""
+            };
+          },
+        //Save the state with asyncStorage
+        () => Tasks.save(this.state.todoArray)
+      );
     }
+  }
 
-
-  deleteNote = i => {
+  //Deletes todo when you click on the trash
+  deleteTodo = i => {
     this.setState(
       prevState => {
-        let noteArray = prevState.noteArray.slice();
-        noteArray.splice(i, 1);
+          let todoArray = prevState.todoArray.slice();
+          todoArray.splice(i, 1);
 
-        return {noteArray: noteArray};
-      },
-      () => Tasks.save(this.state.noteArray)
+          //Updates the new state for the todoArray
+          return {todoArray: todoArray};
+        },
+      //Saves the state with asyncStorage
+      () => Tasks.save(this.state.todoArray)
     );
   };
 
   componentDidMount() {
+  //To make the input field appear above the keyboard when the textfield for add todo is clicked
   Keyboard.addListener(
     isAndroid ? "keyboardDidShow" : "keyboardWillShow",
     e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
@@ -76,68 +78,65 @@ export default class Todo extends Component {
     () => this.setState({ viewPadding: viewPadding })
   );
 
-  Tasks.all(noteArray => this.setState({ noteArray: noteArray || [] }));
+  //Sets the state based on what's saved with asyncstorage
+  Tasks.all(todoArray => this.setState({ todoArray: todoArray || [] }));
 }
 
 render() {
    return (
-     <View
-       style={[styles.container, { paddingBottom: this.state.viewPadding }]}
-     >
-     <View style={styles.header}>
-        <Text style={styles.headerText}> Todo </Text>
-      </View>
-       <FlatList
-         style={styles.list}
-         data={this.state.noteArray}
-         renderItem={({ item, index }) =>(
-           <View >
-
-             <View style={styles.listItemCont}>
-               <Text style={styles.listItem}>
-                 {item.noteText}
-               </Text>
-               <Button light style={styles.mb15}
-               onPress={() => this.deleteNote(index)}>
-               <Text uppercase={false} style={styles.text}>🗑️</Text>
-               </Button>
-             </View>
-           </View>
-        ) }
-        keyExtractor={(item) => item.toString()}
-       />
-       <TextInput
-         style={styles.textInput}
-         onChangeText={this.changeTextHandler}
-         onSubmitEditing={this.addNote}
-         value={this.state.noteText}
-         placeholder="Add Tasks"
-         returnKeyType="done"
-         returnKeyLabel="done"
-       />
-
+     <View style={[styles.container, { paddingBottom: this.state.viewPadding }]}>
+         <View style={styles.header}>
+            <Text style={styles.headerText}> Todo </Text>
+          </View>
+             <FlatList
+                style={styles.list}
+                data={this.state.todoArray}
+                renderItem={({ item, index }) =>(
+                <View >
+                    <View style={styles.listItemCont}>
+                        <Text style={styles.listItem}>
+                            {item.todoText}
+                        </Text>
+                        <Button light style={styles.mb15}
+                            onPress={() => this.deleteTodo(index)}>
+                            <Text uppercase={false} style={styles.text}>🗑️</Text>
+                        </Button>
+                    </View>
+                </View>
+                )}
+                keyExtractor={(item) => item.toString()} />
+            <TextInput
+               style={styles.textInput}
+               onChangeText={this.changeTextHandler}
+               onSubmitEditing={this.addTodo}
+               value={this.state.todoText}
+               placeholder="Add Tasks"
+               returnKeyType="done"
+               returnKeyLabel="done"
+               testID={'addTaskInput'}
+           />
      </View>
-   );
- }
+    );
+  }
 }
 
 
 let Tasks = {
-  convertToArrayOfObject(noteArray, callback) {
+  convertToArrayOfObject(todoArray, callback) {
     return callback(
-      noteArray ? noteArray.split("||").map((note, i) => ({ key: i, noteText: note })) : []
+      todoArray ? todoArray.split("||").map((todo, i) => ({ key: i, todoText: todo })) : []
     );
   },
-  convertToStringWithSeparators(noteArray) {
-    return noteArray.map(note => note.noteText).join("||");
+  convertToStringWithSeparators(todoArray) {
+    return todoArray.map(todo => todo.todoText).join("||");
   },
   all(callback) {
-    return AsyncStorage.getItem("TASKS", (err, noteArray) =>
-      this.convertToArrayOfObject(noteArray, callback)
+    return AsyncStorage.getItem("TASKS", (err, todoArray) =>
+      this.convertToArrayOfObject(todoArray, callback)
     );
   },
-  save(noteArray) {
-    AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(noteArray));
+  save(todoArray) {
+    AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(todoArray));
   }
 };
 
@@ -241,4 +240,4 @@ listItemCont: {
 });
 
 
-AppRegistry.registerComponent("Todo", () => Todo);
+AppRegistry.registerComponent("prosjekt3", () => Todo);
