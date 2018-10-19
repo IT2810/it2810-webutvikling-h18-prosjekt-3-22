@@ -16,31 +16,9 @@ På goal-siden har vi brukt pedometer fra Expo-api'et. Denne bruker Core Motion 
 
 I både todo, goals og contacts har vi brukt AsyncStorage. Dette er react natives api for å lagre data fra appen slik at man får opp igjen de samma dataene selv om appen lukkes. Data lagres i key-value par. Når man har en verdi man vil lagre kan man kalle AsyncStorage.setItem(key, value). Her bestemmer man en key som skal assosieres med den verdien man vil lagre, i tillegg til verdien. For å hente ut igjen denne verdien kaller man AsyncStorage.getItem(key).  
 
-## Testing
-Testene ble utviklet med bruk av Jest. Da vi først fikk prosjektet, skulle vi lage testene med både Jest og Enzyme, men bruk av Enzyme sammen med Jest viste seg å være en utfordring. Vi hadde ikke mulighet til å kjøre noen tester med ‘run test’ kommandoen, og gikk derfor til studass for veiledning rundt problemet. Studass hadde ikke skrevet tester tidligere, men informerte om at Enzyme ikke skulle brukes til dette prosjektet allikevel. Det førte til at vi ikke fikk testet så veldig mye mer enn snapshots, men vi har også lagt inn tester på om elementene inne på hver page er tilgjengelig, ved hjelp av en ‘testID’ på hvert element. Før vi fikk vite at Enzyme ikke skulle brukes, hadde vi plan om å skrive tester som faktisk sjekket funksjonaliteten til hvert element, f.eks at dersom man trykket på To Do-knappen, kunne vi forvente at den gikk inn på To Do-siden. Dessverre ble det ikke slik, og vi ble fortalt av studass at det kun var nødvendig med snapshot-testing.
-Da vi endret designet med native-base, fungerte plutselig ikke testene lengre. Etter mye googling fant vi ut at Jest og Native-Base ikke er kjempegode venner foreløpig, men at det finnes en snarvei. Snarveien var å legge følgende i package.json-filen.
-
-```
-"transformIgnorePatterns": [
-"node_modules/(?!react-native|expo|react-navigation|native-base|@shoutem/theme|@shoutem/animation|@shoutem/ui|tcomb-form-native)"]
-```
-
-For å kjøre testene må følgende skrives inn i terminalen:
-
-```
-npm install --save-dev jest jest-expo babel-jest jest-react-native babel-preset-env babel-preset-react-native react-test-renderer 
-```
-
-Etter at alle dependencies er lastet ned skrives følgende i terminalen for å faktisk kjøre testene:
-
-```
-npm test
-```
-
-Ellers har vi testet koden underveis på både Android og ios, da vi har vært heldige med å ha begge typer telefoner i gruppa. Det har vist seg at det er noen designforskjeller på de to plattformene, og vi har også opplevd at noen funksjoner har vært vanskeligere å implementere på en av plattformene enn den andre. Slike problemer har heldigvis blitt løst underveis, uten for mye frustrasjon.
 
 ## Tutorial
-Disse instruksjonene vil gjøre at du får en kopi av prosjektet oppe og går på din lokale maskin for utvikling og testingsformål. 
+Disse instruksjonene vil gjøre at du får en kopi av prosjektet oppe og går på din lokale maskin for utvikling. 
 
 ### Forutsetninger
 Dette er software du må installere for å kjøre prosjektet på din maskin og hvordan du installerer det
@@ -78,12 +56,14 @@ En step by step prosess som forteller deg hvordan du installerer alle dependenci
 
 #### Step 1: Installer react-navigation
 
+React-navigation er et bibilotek for routing, som gjør det enkelt navigere mellom de ulike sidene
 ```
 npm install react-navigation --save
 ```
 
 #### Step 2: Installer native-base
 
+Native-base er et bibilotek for å lage UI komponenter. Vi har bare brukt dette bibiloteket på forsiden. Hadde vi oppdaget det litt før hadde vi også brukt det på de andre sidene også
 ```
 npm install native-base --save
 
@@ -97,6 +77,30 @@ Hvis alt går som forventet og du ikke får noen error kan du kjøre programmet
 expo start
 
 ```
+
+
+## Testing
+Testene ble utviklet med bruk av Jest. Da vi først fikk prosjektet, skulle vi lage testene med både Jest og Enzyme, men bruk av Enzyme sammen med Jest viste seg å være en utfordring. Vi hadde ikke mulighet til å kjøre noen tester med ‘run test’ kommandoen, og gikk derfor til studass for veiledning rundt problemet. Studass hadde ikke skrevet tester tidligere, men informerte om at Enzyme ikke skulle brukes til dette prosjektet allikevel. Det førte til at vi ikke fikk testet så veldig mye mer enn snapshots, men vi har også lagt inn tester på om elementene inne på hver page er tilgjengelig, ved hjelp av en ‘testID’ på hvert element. Før vi fikk vite at Enzyme ikke skulle brukes, hadde vi plan om å skrive tester som faktisk sjekket funksjonaliteten til hvert element, f.eks at dersom man trykket på To Do-knappen, kunne vi forvente at den gikk inn på To Do-siden. Dessverre ble det ikke slik, og vi ble fortalt av studass at det kun var nødvendig med snapshot-testing.
+Da vi endret designet med native-base, fungerte plutselig ikke testene lengre. Etter mye googling fant vi ut at Jest og Native-Base ikke er kjempegode venner foreløpig, men at det finnes en snarvei. Snarveien var å legge følgende i package.json-filen.
+
+```
+"transformIgnorePatterns": [
+"node_modules/(?!react-native|expo|react-navigation|native-base|@shoutem/theme|@shoutem/animation|@shoutem/ui|tcomb-form-native)"]
+```
+
+For å kjøre testene må følgende skrives inn i terminalen:
+
+```
+npm install --save-dev jest jest-expo babel-jest jest-react-native babel-preset-env babel-preset-react-native react-test-renderer 
+```
+
+Etter at alle dependencies er lastet ned skrives følgende i terminalen for å faktisk kjøre testene:
+
+```
+npm test
+```
+
+Ellers har vi testet koden underveis på både Android og ios, da vi har vært heldige med å ha begge typer telefoner i gruppa. Det har vist seg at det er noen designforskjeller på de to plattformene, og vi har også opplevd at noen funksjoner har vært vanskeligere å implementere på en av plattformene enn den andre. Slike problemer har heldigvis blitt løst underveis, uten for mye frustrasjon.
 For å få opp prosjektet på mobilen kan du blant annet laste ned appen expo og enten scanne QR koden eller trykke på prosjektet som kommer opp under "Recently in development"
 
 ## Samarbeid, bruk av git, koding og leveranse
