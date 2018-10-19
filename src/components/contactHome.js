@@ -19,19 +19,13 @@ export default class ContactHome extends Component {
         this.setState({modalVisible: visible});
     };
 
+    //Loads all the saved contacts
     componentDidMount(){
         Contacts.loadContacts(contactArray => this.setState({ contactArray: contactArray || [] }))
     }
 
+    //Function that adds a new contact and saves the state
     newContact = () => {
-        let contact = [
-            "",
-            "",
-        ];
-
-        contact[0] = this.state.newName;
-        contact[1] = this.state.newNumber;
-
         let oldArray = this.state.contactArray;
         this.setState(
           prevState => {
@@ -42,10 +36,12 @@ export default class ContactHome extends Component {
               newNumber: ""
             };
           },
+          //Save the contact with asyncStorage
               () => Contacts.saveContacts(this.state.contactArray)
         );
     };
 
+    //Function that deletes a contact and saves the new state
     deleteContact = index => {
         this.setState(
             prevState => {
@@ -54,26 +50,31 @@ export default class ContactHome extends Component {
 
                 return {contactArray: contactArray};
             },
+            //Save the new state with asyncStorage
             () => Contacts.saveContacts(this.state.contactArray)
         );
     };
 
+
+    //Checks to see if the tlf number has correct format
     checkNumber(text){
         let newText = '';
         let numbers = '0123456789';
 
+        //Goes through what's written in the textfield for tlf and checks that it only consists of numbers
         for (var i=0; i < text.length; i++) {
             if(numbers.indexOf(text[i]) > -1 ) {
                 newText = newText + text[i];
             }
             else {
-                // your call back function
                 Alert.alert("Please enter numbers only for number");
             }
         }
+        //Sets the state for the new number
         this.setState({ newNumber: newText });
     }
 
+    //Modal that show up when you click "Add contact"
     drawModal = () => {
         return (
             <Modal
@@ -123,13 +124,13 @@ export default class ContactHome extends Component {
         )
     };
 
+    //Renders the contacts with name and number
+    //If no contacts, you see nothing. Just and "Add contact" button
     render () {
-
         return (
-
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}> Conhhtacts </Text>
+                    <Text style={styles.headerText}> Conjtacts </Text>
                 </View>
 
                 {this.drawModal()}
@@ -161,6 +162,8 @@ export default class ContactHome extends Component {
     }
 }
 
+
+//Asyncstorage for adding and removing contacts
 let Contacts = {
     convertToArrayOfObject(contactArray, callback) {
         return callback(

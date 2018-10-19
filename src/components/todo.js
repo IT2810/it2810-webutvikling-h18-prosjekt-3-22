@@ -190,7 +190,7 @@ listItemCont: {
 
   textInput: {
     alignSelf: 'stretch',
-    color: '#fff',
+    color: 'white',
     padding: 20,
     backgroundColor: "#252525",
     borderTopWidth: 2,
@@ -201,35 +201,6 @@ listItemCont: {
     borderColor: "gray",
     borderWidth: isAndroid ? 0 : 1,
     width: "100%"
-  },
-
-  addButton: {
-    position: 'absolute',
-    zIndex: 11,
-    right: 20,
-    bottom: 90,
-    backgroundColor: '#4d79ff',
-    width: 90,
-    height: 90,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 8,
-  },
-
-  addButtonText: {
-    color: "#fff",
-    fontSize: 25,
-  },
-
-  noteDelete: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    top: 10,
-    bottom: 10,
-    right: 10,
   },
 
   text: {
