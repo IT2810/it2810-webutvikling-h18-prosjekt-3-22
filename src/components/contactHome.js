@@ -241,15 +241,12 @@ const styles = StyleSheet.create({
         marginRight: 5,
         //width: '100%'
     },
-<<<<<<< HEAD
     inputField: {
         width: '100%',
     },
-=======
 /*     inputField: {
         width: 200,
     }, */
->>>>>>> c44ff2b55fe70c91b804f344fd8ff8918ccbe605
 
     textBox: {
         justifyContent: 'center',
