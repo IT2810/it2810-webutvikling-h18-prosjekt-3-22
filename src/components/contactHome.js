@@ -3,7 +3,7 @@ import { AppRegistry, StyleSheet, Text, TextInput, View, Button, Modal, AsyncSto
 import Todo from "./todo";
 
 
-/** Got some inspiration from this:  https://codeburst.io/todo-app-with-react-native-f889e97e398e **/
+/** Got some inspiration from this: https://codeburst.io/todo-app-with-react-native-f889e97e398e **/
 export default class ContactHome extends Component {
 
     constructor (){
