@@ -15,7 +15,7 @@ import {
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
-
+/** Got some inspiration from this:  https://codeburst.io/todo-app-with-react-native-f889e97e398e **/
 export default class Todo extends Component {
   constructor(props){
     super(props);
