@@ -4,6 +4,8 @@ import {Pedometer} from "expo";
 import { StyleSheet, Text, View, TextInput} from 'react-native';
 import { AsyncStorage } from "react-native";
 
+
+/** Got some inspiration from this: https://docs.expo.io/versions/latest/sdk/pedometer **/
 class Goal extends Component {
   state = {
     isPedometerAvailable: "checking",
